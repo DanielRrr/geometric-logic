@@ -1,0 +1,172 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bussproofs}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{dsfont}
+\usepackage{mathabx}
+\usepackage[all, 2cell]{xy}
+\usepackage[all]{xy}
+\usepackage{wasysym}
+\usepackage{rotating}
+\usepackage{geometry}
+\usepackage{trfsigns}
+\usepackage{cmll}
+\usepackage{authblk}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{lipsum}
+\usepackage{extpfeil}
+\usepackage{soul}
+\usepackage{graphicx}
+
+\newcommand\mapsfrom{\mathrel{\reflectbox{\ensuremath{\mapsto}}}}
+
+\theoremstyle{defin}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{claim}
+\newtheorem{claim}{Claim}
+
+\theoremstyle{prop}
+\newtheorem{prop}{Proposition}
+
+\theoremstyle{lemma}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{fact}
+\newtheorem{fact}{Fact}
+
+\theoremstyle{ex}
+\newtheorem{ex}{Example}
+
+
+\theoremstyle{col}
+\newtheorem{col}{Corollary}
+
+\let\strokeL\L
+\DeclareRobustCommand{\L}{\ifmmode\mathbf{L}\else\strokeL\fi}
+
+\author{Daniel Rogozin}
+\date{}
+\title{Notes on Geometric logic}
+
+\begin{document}
+
+\maketitle
+
+\section{Sheaves, Sites and Grothendieck toposes}
+
+Let $\mathcal{I} = (I, \theta)$ be a topological space. Consider $\theta$ as a poset. A {\emph presheaf} over $\mathcal{I}$ is a contravariant functor from $\theta$ to ${\bf Set}$.
+
+The notion of a presheaf generalises essentially the following construction from set-theoretic topology. First of all, we discuss a set-theoretic examples without referring to topology. Consider an indexed family of disjoint sets:
+\begin{center}
+$\mathcal{A} = \{ A_i \: | \: i \in I \}$.
+\end{center}
+We can associate an obvious map $p : A \to I$ since for every $x \in \mathcal{A}$ there is a unique $i \in I$ such that $x \in A_i$. Take
+
+\begin{center}
+$p^{-1}(\{ i \}) = \{ x \: | \: p(x) = i\} = A_i$
+\end{center}
+
+Such $p^{-1}(\{ i \})$ is called the \emph{fibre} over $i$, the whole structure is a bundle of sets over the base space $I$, $\mathcal{A}$ is the stalk space (l'espace etale) of the bundle. More generally, we can extract the bundle from every map $p : A \to I$
+
+A morphism of bundles $(A, I)$ and $(B, I)$ is a commutative triangle of the following form:
+
+\xymatrix{
+&&&&&& A \ar[rr]^f \ar[dr]_{p_1} && B \ar[dl]^{p_2}\\
+&&&&&&& I
+}
+
+Topologically, a sheaf is a version of bundles for topological spaces. Let $\mathcal{I} = (I, \theta)$ be a topological space. A sheaf is a tuple $(\mathcal{A}, p)$, where $\mathcal{A}$ is a topological space and $p : A \to I$ is a continuous map, which is also a local homeomorphism, that is, every $x \in \mathcal{A}$ has an open neighbourhood, which mapped homeomorphically by $p$ onto $p(U)$ and $p(U)$ is open in $I$. The category of all sheaves of $I$ is sometimes called a spatial topos.
+
+We can extract a presheaf from a sheaf $(A, f)$ as a contravariant functor $F_f : \theta \to {\bf Set}$ as
+\begin{center}
+$F_f(V) = \{ s : V \to A \: | \: \text{$s$ is continuous and $f \circ s = V \hookrightarrow I $}\}$
+\end{center}
+
+The category of presheafs over $I$, denoted as ${\bf PsC}(I)$, consists of presheafs as objects and natural transformations $\tau : F \Rightarrow G$, that is, a collection of functions $\tau_U : F(U) \to G(U)$ making this square commute whenever $U \subseteq V$
+
+\xymatrix{
+&&&&& F(V) \ar[d]_{F^V_U} \ar[rr]^{\tau_V} && G(V) \ar[d]^{G^V_U} \\
+&&&&& F(U) \ar[rr]_{\tau_U} && G(U)
+}
+
+It is clear that ${\bf PsC}(I)$ is equivalent to ${\bf Set}^{\theta^{Op}}$.
+
+Let $X$ be an index set and $V$ an open set, an \emph{open cover} of $V$ is a collection of sets $\{ V_x\}_{x \in X}$ such that
+\begin{center}
+$V = \bigcup \limits_{x \in X} V_x$
+\end{center}
+
+Intuitively, a sheaf is a presheaf that preserves open covers.
+
+A \emph{sheaf} is a presheaf $F$ satisfying the following two extra-principles. Let $V$ be an open set and $\{V_x
+\}_{x \in X}$ an open cover, then:
+\begin{enumerate}
+\item Let $s, t \in F(V)$ be sections such that such that $s|_{V_x} = t|_{V_x}$ for $x \in X$, then $s = t$.
+\item Let $\{ s_x \in F(V_x) \}_{x \in X}$ be a family of sections. If for all $x, y \in X$ we have $s_x|_{V_x \cap V_y} = s_y|_{V_x \cap V_y}$, then there exists a section $s \in F(V)$ such that $s|_{V_x} = s_x$ for all $x \in X$.
+\end{enumerate}
+Equivalently, we can reformulate the latter as that $F(V) = \varprojlim_{x \in X} F(V_x)$.
+The category ${\bf Sh}(I)$ is a category of sheaves over $I$.
+
+\subsection{Grothendieck topos}
+
+The notion of a Grothendieck topos generalises the aforementioned topological constructions. We start with the definition of a site.
+
+Let $\mathcal{C}$ be a locally small category. A \emph{pretopology} on $\mathcal{C}$ is an assignment of each $A \in {\bf Ob}(\mathcal{C})$ of a collection of arrows $\operatorname{Cov}(A)$ (covers of $A$, or covering sieves) with the following properties:
+\begin{enumerate}
+\item $\{ id_A : A \to A \} \in \operatorname{Cov}(A)$
+\item If $\{ f_x : A_x \to A \: | \: x \in X \} \in \operatorname{Cov}(A)$ and for each $x \in X$ we have an $a_x$-cover
+\begin{center}
+$\{ f_y^x : A_y^x \to A_x \: | \: y \in Y_x \} \in \operatorname{Cov}(A_x)$
+\end{center}
+then
+\begin{center}
+$\{ f_x \circ f_y^x : A^x_y \to A \: | \: x \in X, y \in Y_x\} \in  \operatorname{Cov}(A)$
+\end{center}
+\item If $\{ f_x : A_x \to A \: | \: x \in X \} \in \operatorname{Cov}(A)$ and $g : B \to A$ and assume that for each $x \in X$ the pullback of $f_x$ along $g$ exists:
+
+\xymatrix{
+&&&&& B \times_A A_x \ar[r] \ar[d]_{g_x} & A_x \ar[d]^{f_x}\\
+&&&&& B \ar[r]_{g} & A
+}
+then $\{ g_x : B \times_A A_x \to B \:| \: x \in X\} \in \operatorname{Cov}(B)$
+\end{enumerate}
+
+A \emph{site} is the pair $(\mathcal{C}, \operatorname{Cov})$ consisting of a category and a pretopology on it.
+
+A Grothendieck topos is a site with extra-conditions that generalise the axioms of topological sheaves in terms of a pretopology. A presheaf of sets over a category $\mathcal{C}$ is a contravariant functor $F : \mathcal{C} \to {\bf Set}$
+
+Let $\operatorname{Cov}$ be a pretopology on a category $\mathcal{C}$ and $\{ f_x : A_x \to A \: | \: x \in X \} \in \operatorname{Cov}(A)$. Let $x, y \in X$ and we have the pullback of $f_x$ and $f_y$
+
+\xymatrix{
+&&&&& A_x \times_A A_y \ar[r] \ar[d] & A_y \ar[d]^{f_y}\\
+&&&&& A_x \ar[r]_{f_x} & A
+}
+
+If $F$ is a presheaf over $\mathcal{C}$, then we have arrows $F^x_y : F(A_x) \to F(A_x \times_A A_y)$ and $F^y_x : F(A_y) \to F(A_x \times_A A_y)$. Denote $F_x$ as the arrow $F(f_x) : F(A) \to F(A_x)$.
+
+A presheaf $F$ is a sheaf, if for any cover $\{ f_x : A_x \to A \: | \: x \in X \} \in \operatorname{Cov}(A)$, then for all $x, y \in X$ such that for all $s_x \in F(A_x)$ and $s_y \in F(A_y)$ such that $F^x_y(s_x) = F^y_x(y)$, then there exists a unique $s \in F(A)$ such that $F_x(s) = s_x$ for $x \in X$.
+
+${\bf Sh}(\operatorname{Cov})$ is the category of sheaves of the site $(\mathcal{C}, \operatorname{Cov})$. A Grothendieck topos is a category of sheaves of some site up to categorical equivalence.
+
+\section{Locales and cover systems}
+
+\section{Kripke-Joyal semantics and quantifiers via adjoint functors}
+
+\section{Internal logic}
+
+\section{Geometric morphisms}
+
+\section{Geometric logic}
+
+\section{Kripke-Joyal semantics for quantales and non-commutative geometric theories}
+
+\end{document}
