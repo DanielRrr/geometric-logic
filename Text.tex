@@ -61,6 +61,21 @@
 
 \maketitle
 
+\section{Locales, quantales and cover systems}
+
+A frame is a complete lattice $\mathcal{L} = (L, \wedge, \bigvee)$ such that, for all $a \in L$ and $A \subseteq L$:
+\begin{center}
+$a \wedge \bigvee A = \bigvee \{ a \wedge b \: | \: b \in A \}$
+\end{center}
+A frame homeomorphism is a map between frames that preserves $0$, $1$, $\wedge$ and $\bigvee$. The ${\bf Frm}$ is the category of all frames and homeomorphisms, the category of locales ${\bf Loc}$ is said to be the opposite category of the category of frames.
+
+The notion of a quantale generalises frames. A quantale $\mathcal{Q} = (Q, \cdot, \bigvee)$ is a complete lattice-ordered semigroup such that, for all $a \in Q$ and $A \subseteq Q$:
+\begin{center}
+$a \cdot \bigvee A = \bigvee \{ a \cdot b \: | \: b \in A \}$
+
+$\bigvee A \cdot a = \bigvee \{ b \cdot a \: | \: b \in A \}$
+\end{center}
+
 \section{Sheaves, Sites and Grothendieck toposes}
 
 Let $\mathcal{I} = (I, \theta)$ be a topological space. Consider $\theta$ as a poset. A {\emph presheaf} over $\mathcal{I}$ is a contravariant functor from $\theta$ to ${\bf Set}$.
@@ -157,7 +172,65 @@ A presheaf $F$ is a sheaf, if for any cover $\{ f_x : A_x \to A \: | \: x \in X 
 
 ${\bf Sh}(\operatorname{Cov})$ is the category of sheaves of the site $(\mathcal{C}, \operatorname{Cov})$. A Grothendieck topos is a category of sheaves of some site up to categorical equivalence.
 
-\section{Locales and cover systems}
+Alternatively, one can define a Grothendieck topos in terms of a Grothendieck topology as follows. Define a sieve $S$
+as family morphisms in a category $\mathcal{C}$ that behaves as a right ideal:
+
+\begin{center}
+$f \in S$ implies $f \circ g \in S$
+\end{center}
+
+If $S$ is a sieve on $C \in \operatorname{Ob}(\mathcal{C})$ and $h \in Hom(D, C)$ for any $D \in \operatorname{Ob}(\mathcal{C})$, then
+\begin{center}
+$h^*(S) = \{ g \: | \: cod(g) = D, g \circ h \in S \}$
+\end{center}
+
+A \emph{Grothendieck topology} on a category $\mathcal{C}$ is a function $J$ that maps every $C \in \operatorname{Ob}(\mathcal{C})$, denoted as $J(C)$ such that:
+\begin{enumerate}
+\item the maximal sieve $t_C = \{ f \: | \: cod(f) = C\} \in J(C)$
+\item If $S \in J(C)$, then $h^*(S) \in J(D)$
+\item If $S \in J(C)$ and $R$ is a sieve of $C$ such that $h^*(R) \in J(D)$ for all $h : D \to C$, then $R \in J(C)$
+\end{enumerate}
+Also any $J(C)$ is upward closed.
+
+\subsection{Examples}
+
+We start with some examples of a site.
+
+Let $\mathcal{T}$ be a small category of topological spaces closed under finite limits and under taking open subspaces. Define $\operatorname{Cov}$ as:
+\begin{center}
+$\{ f_i : Y_i \to X \: | \: i \in I \}$ iff each $Y_i$ is an open subspace of $X$ and $\bigcup \limits_{i \in I} Y_i = X$
+\end{center}
+
+The first axiom holds obviously, the second axiom holds since $\mathcal{T}$ is closed under taking subspaces. The third axiom holds because of the closure under finite limits.
+
+Let $H$ be a frame. One can define a pretopology on a frame by putting:
+\begin{center}
+$\{ a_i \: | \: i \in I \} \in \operatorname{Cov}(c)$ iff $c = \bigvee \limits_{i \in I} a_i$
+\end{center}
+
+\subsubsection{The Zariski site}
+
+Let $f_1, \dots, f_m \in \mathbb{C}[x_1, \dots, x_n]$, the locus of $f_1, \dots, f_m$ is the set
+\begin{center}
+$V(f_1, \dots, f_m) = \{ (z_1, \dots, z_n) \in C^n \: | \: f_i(z_1, \dots, z_n) = 0, i = 1, \dots, m \}$
+\end{center}
+Such a locus is called a \emph{complex affine variety}. With every variety $V$ we can associate the following ideal in the polynomial ring $\mathbb{C}[x_1, \dots, x_n]$:
+\begin{center}
+$I_V = \{ f \in \mathbb{C}[x_1, \dots, x_n] \: | \: \forall \vec{z} \in V f(\vec{z}) = 0 \}$
+\end{center}
+Conversly, let $I$ be an ideal in the polynomial ring $\mathbb{C}[x_1, \dots, x_n]$, then we can define the variety
+\begin{center}
+$V_I = \{ (z_1, \dots, z_n) \in C^n \: | \: f(z_1, \dots, z_n) = 0, f \in I \} $
+\end{center}
+If $I = (f_1, \dots, f_m)$, then $V_I = V(f_1, \dots, f_m)$.
+
+With every ideal $I$ we can associate its radical
+\begin{center}
+$\sqrt{I} = \bigcup \limits_{0 < r < \omega} \{ f \in \mathbb{C}[x_1, \dots, x_n] \: | \: f^r \in I \}$
+\end{center}
+According to the Hilbert Nullstellensatz, $V_J \neq V_I$ whenever $\sqrt{I} \neq \sqrt{J}$.
+
+The maximal ideals in $\mathbb{C}[x_1, \dots, x_n]$ have the form $(x_1 - a_1, \dots, x_n - a_n)$, so the corresponding variety is merely the singleton $\{ (a_1, \dots, a_n) \}$, a minimal algebraic variety. A prime ideal $P$ (that is, $fg \in P$ implies $g \in P$) in $\mathbb{C}[x_1, \dots, x_n]$ is a radical ideal. The corresponding variety of $P$ is irreducible, that is, it cannot be represented as the union of a finite number of smaller ideals. Moreover, every radical ideal can be represented as the intersection of some finite number of prime ideals. Dually, every complex affine variety can be represented as the union of some finite number of irreducible varieties.
 
 \section{Kripke-Joyal semantics and quantifiers via adjoint functors}
 
