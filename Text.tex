@@ -115,6 +115,14 @@ The category of presheafs over $I$, denoted as ${\bf PsC}(I)$, consists of presh
 
 It is clear that ${\bf PsC}(I)$ is equivalent to ${\bf Set}^{\theta^{Op}}$.
 
+Let $F : \theta \to {\bf Set}$ be a presheaf. Let $x \in X$ and let $U, V$ be open neighbourhoods of $x$.
+Let $s \in F(U)$ and $t \in F(V)$. $S$ and $T$ are said to have the \emph{same germ} at $x$, whenever there exists an open set $W \subseteq U \cap V$ with $x \in W$ such that $s|W = t|W \in P(W)$. Having the same germ is an equivalence relation, and the \emph{germ} of $s$ in $x$ in an equivalence class of $s$ denoted as $germ_x s$.
+
+The \emph{stalk} of $F$ in $x$ is the set of all germs of $x$
+\begin{center}
+$F_x = \{ germ_x s \: | \: s \in F(U), U \in \theta \}$
+\end{center}
+
 Let $X$ be an index set and $V$ an open set, an \emph{open cover} of $V$ is a collection of sets $\{ V_x\}_{x \in X}$ such that
 \begin{center}
 $V = \bigcup \limits_{x \in X} V_x$
@@ -167,6 +175,8 @@ Let $\operatorname{Cov}$ be a pretopology on a category $\mathcal{C}$ and $\{ f_
 }
 
 If $F$ is a presheaf over $\mathcal{C}$, then we have arrows $F^x_y : F(A_x) \to F(A_x \times_A A_y)$ and $F^y_x : F(A_y) \to F(A_x \times_A A_y)$. Denote $F_x$ as the arrow $F(f_x) : F(A) \to F(A_x)$.
+
+
 
 A presheaf $F$ is a sheaf, if for any cover $\{ f_x : A_x \to A \: | \: x \in X \} \in \operatorname{Cov}(A)$, then for all $x, y \in X$ such that for all $s_x \in F(A_x)$ and $s_y \in F(A_y)$ such that $F^x_y(s_x) = F^y_x(y)$, then there exists a unique $s \in F(A)$ such that $F_x(s) = s_x$ for $x \in X$.
 
@@ -231,6 +241,28 @@ $\sqrt{I} = \bigcup \limits_{0 < r < \omega} \{ f \in \mathbb{C}[x_1, \dots, x_n
 According to the Hilbert Nullstellensatz, $V_J \neq V_I$ whenever $\sqrt{I} \neq \sqrt{J}$.
 
 The maximal ideals in $\mathbb{C}[x_1, \dots, x_n]$ have the form $(x_1 - a_1, \dots, x_n - a_n)$, so the corresponding variety is merely the singleton $\{ (a_1, \dots, a_n) \}$, a minimal algebraic variety. A prime ideal $P$ (that is, $fg \in P$ implies $g \in P$) in $\mathbb{C}[x_1, \dots, x_n]$ is a radical ideal. The corresponding variety of $P$ is irreducible, that is, it cannot be represented as the union of a finite number of smaller ideals. Moreover, every radical ideal can be represented as the intersection of some finite number of prime ideals. Dually, every complex affine variety can be represented as the union of some finite number of irreducible varieties.
+
+The \emph{Zariski topology} on $\mathbb{C}^n$ is a topology defined on irreducible varieties as a closed subbasis. An algebraic hypersufrace is the locus of a single polynomial $f(x_1, \dots, x_n) = 0$. The complements of hypersurfaces form the open subbasis for the Zariski topology. An example of a cover of $\mathbb{C}^n$ can be defined by $t$ polynomials $f_1, \dots, f_t \in \mathbb{C}[x_1, \dots, x_n]$ such that $f_1 + \dots + f_t = 1$. Their hypersurfaces have no common points, so their complements are an open cover of $\mathbb{C}^n$.
+
+With the Zariski topology, we can associate a \emph{structure sheaf}. Consider a field $\mathbb{F} = \mathbb{C}(x_1, \dots, x_n)$ consisting of rational functions, where $g \neq 0$. A rational function $h$ is defined at $Q \in (a_1, \dots, a_n) \in \mathbb{C}^n$, whenever there is a Zariski open set $W$, an open neighbourhood of $Q$, such that $h$ has the form $f/g$ for some $f, g \in \mathbb{C}[x_1, \dots, x_n]$ such that $g(\vec{z}) \neq 0$ for all $\vec{z} \in W$. In other words, $h$ yields a function $W \to \mathbb{C}$.
+
+Now let $U$ be an open set in the Zariski topology, define $\mathcal{O}(U)$ as
+\begin{center}
+$\mathcal{O}(U) = \{ h \in \mathbb{F} \: | \: \forall Q \in U \: \text{$h(Q)$ is defined} \}$
+\end{center}
+The set $\mathcal{O}(U)$ is a ring, a moreover, a subring of a field $\mathbb{F}$ whenever $U$ is non-empty. $\mathcal{O}$ is also a contravariant functor (if we consider the Zariski topology on $\mathbb{C}$ as a category). Given $U \subseteq U'$, then $\mathcal{O}(U') \to \mathcal{O}(U)$ is a ring homomorphism that restricts each $h \in \mathcal{O}(U')$ to points of $U$. That is, $\mathcal{O}$ is a presheaf of rings for the Zariski topology on $\mathbb{C}^n$. It is also can be showed that $\mathcal{O}$ is a sheaf.
+
+The stalk of $\mathcal{O}$ at a point $p \in \mathbb{C}^n$ consists of germs of all those rational functions defined in some open neighbourhood of $p$. Such a stalk is a ring with a unique maximal proper ideal, the ideal of all those germs that vanish at $p$. A \emph{local ring} is a ring of such form.
+
+More generally, we consider the category of all affine varieties of $V \subseteq \mathbb{C}^n$ (for various $n \geq 0$), where morphisms $\phi : V \to W$ are defined as follows. Clearly $V = V(I)$ and $W = V(I')$ for some ideals $I$ and $I'$. $\phi$ is a function defined by an $m$-tuple $\phi = (h_1, \dots, h_m)$ of rational functions of $x_1, \dots, x_n$ such that each $h_i$ is defined at every point of $V$ and $(h_1, \dots, h_m)$ as a function $V \to \mathbb{C}^m$ maps $V$ into $W$.
+
+This category can be equipped with the open cover topology, which is the Grothedieck topology defined by covering families of Zariski open sets.
+
+This construction can be generalised as the Zariski site over a commutative ring $K$.
+
+Let $K$ be a commutative ring with unit, define a ring $K[a^{-1}]$ of quotients for $a \in K$ that extends $K$ with fractions $b/a^n$ for each $b \in K$ and $n < \omega$.
+
+As above, one can define the $n$-dimensional affine space $K^n$. Let $I$ be an ideal in the polynomial ring $K[x_1, \dots, x_n]$, we can define the variety $V_I$ defined similarly to the complex case. Generally, the Nullstellensatz is not the case for an abstract $K[x_1, \dots, x_n]$, so we shall work with quotient rings $K[x_1, \dots, x_n]/I$. Let $f_1, \dots, f_m \in K[x_1, \dots, x_n]$, the \emph{finitely presented $K$-algebra} is the quotient ring $K[x_1, \dots, x_n]/(f_1, \dots, f_m)$. $(K - Alg)_{fp}$ is the category all finitely presented $K$-algebra. There is a contravariant adjointness between $(K - Alg)_{fp}$ and the corresponding varieties.
 
 \section{Kripke-Joyal semantics and quantifiers via adjoint functors}
 
