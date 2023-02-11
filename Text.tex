@@ -266,8 +266,7 @@ We define the non-commutative geometric logic with the following axioms and infe
 
 \begin{prooftree}
 \AxiomC{$ $}
-\RightLabel{$x \notin FV(\psi)$}
-\UnaryInfC{$\varphi \land \exists x \psi \vdash \exists x (\varphi \land \phi$)}
+\UnaryInfC{$\varphi \bullet (\psi \bullet \theta) \dashv \vdash (\varphi \bullet \psi) \bullet \theta$}
 \end{prooftree}
 
 \begin{prooftree}
@@ -300,7 +299,7 @@ We define the non-commutative geometric logic with the following axioms and infe
 
 \begin{prooftree}
 \AxiomC{$ $}
-\UnaryInfC{$\varphi \land \bigvee \Phi \vdash \bigvee \limits_{\phi \in \Phi} (\varphi \land \phi$)}
+\UnaryInfC{$\varphi \bullet \bigvee \Phi \vdash \bigvee \limits_{\phi \in \Phi} (\varphi \bullet \phi)$}
 \end{prooftree}
 
 \begin{prooftree}
@@ -312,7 +311,7 @@ We define the non-commutative geometric logic with the following axioms and infe
 \begin{prooftree}
 \AxiomC{$ $}
 \RightLabel{$x \notin FV(\psi)$}
-\UnaryInfC{$\varphi \land \exists x \psi \vdash \exists x (\varphi \land \phi$)}
+\UnaryInfC{$\varphi \bullet \exists x \psi \vdash \exists x (\varphi \bullet \phi$)}
 \end{prooftree}
 
 \end{flushright}
