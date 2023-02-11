@@ -244,7 +244,79 @@ By mapping $x \mapsto (x]$.
 
 \subsection{Geometric cover systems and completeness}
 
+We define the non-commutative geometric logic with the following axioms and inference rules.
 
+\begin{prooftree}
+\AxiomC{$ $}
+\UnaryInfC{$\varphi \rightarrow \varphi$}
+\end{prooftree}
+
+\begin{minipage}{0.5\textwidth}
+\begin{flushleft}
+
+\begin{prooftree}
+  \AxiomC{$\varphi \vdash \psi$}
+  \UnaryInfC{$\varphi \bullet \theta \vdash \psi \bullet \theta$}
+\end{prooftree}
+
+\begin{prooftree}
+  \AxiomC{$\varphi \vdash \psi$}
+  \UnaryInfC{$\theta \bullet \varphi \vdash \theta \bullet \psi$}
+\end{prooftree}
+
+\begin{prooftree}
+\AxiomC{$ $}
+\RightLabel{$x \notin FV(\psi)$}
+\UnaryInfC{$\varphi \land \exists x \psi \vdash \exists x (\varphi \land \phi$)}
+\end{prooftree}
+
+\begin{prooftree}
+\AxiomC{$\varphi \vdash \psi$}
+\RightLabel{$x \notin FV(\varphi)$}
+\UnaryInfC{$\exists x \varphi \vdash \psi$}
+\end{prooftree}
+
+\begin{prooftree}
+  \AxiomC{$\varphi \vdash \psi$}
+  \AxiomC{$\psi \vdash \theta$}
+  \BinaryInfC{$\varphi \vdash \theta$}
+\end{prooftree}
+
+\end{flushleft}
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+\begin{flushright}
+\begin{prooftree}
+\AxiomC{$ $}
+\RightLabel{$\varphi \in \Phi$}
+\UnaryInfC{$\varphi \vdash \bigvee \Phi$}
+\end{prooftree}
+
+\begin{prooftree}
+\AxiomC{$\varphi \vdash \psi$}
+\RightLabel{$\varphi \in \Phi$}
+\UnaryInfC{$\bigvee \Phi \vdash \psi$}
+\end{prooftree}
+
+\begin{prooftree}
+\AxiomC{$ $}
+\UnaryInfC{$\varphi \land \bigvee \Phi \vdash \bigvee \limits_{\phi \in \Phi} (\varphi \land \phi$)}
+\end{prooftree}
+
+\begin{prooftree}
+\AxiomC{$\exists x \varphi \vdash \psi$}
+\RightLabel{$x \notin FV(\varphi)$}
+\UnaryInfC{$\varphi \vdash \psi$}
+\end{prooftree}
+
+\begin{prooftree}
+\AxiomC{$ $}
+\RightLabel{$x \notin FV(\psi)$}
+\UnaryInfC{$\varphi \land \exists x \psi \vdash \exists x (\varphi \land \phi$)}
+\end{prooftree}
+
+\end{flushright}
+\end{minipage}
 
 \subsection{Quantalic cover systems for quantale representation}
 
