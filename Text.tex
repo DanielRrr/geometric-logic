@@ -61,6 +61,10 @@
 
 \maketitle
 
+\tableofcontents
+
+\newpage
+
 \nocite{*}
 
 \section{Locales, quantales and cover systems}
@@ -79,6 +83,15 @@ $\bigvee A \cdot a = \bigvee \{ b \cdot a \: | \: b \in A \}$.
 \end{center}
 
 \subsection{Examples}
+
+Let $\operatorname{Sub}(\mathcal{R})$ be the set of all additive subgroups of a ring $\mathcal{R}$. Let $A \subseteq \operatorname{Sub}(\mathcal{R})$ and $G, H \in \operatorname{Sub}(\mathcal{R})$, define supremum and product as follows:
+\begin{center}
+$\bigvee A = \{ \sum A' \: | \: A' \subseteq_{fin} A \}$,
+
+$G \cdot H = \{ \sum \limits_{i = 0}^n a_i b_i \: | \: a_i \in G, b_i \in H, n < \omega \}$
+\end{center}
+
+\subsubsection{Quantales from $C^{*}$-algebras}
 
 \subsection{Localic cover systems for locale representation}
 
@@ -510,6 +523,30 @@ This construction can be generalised as the Zariski site over a commutative ring
 Let $K$ be a commutative ring with unit, define a ring $K[a^{-1}]$ of quotients for $a \in K$ that extends $K$ with fractions $b/a^n$ for each $b \in K$ and $n < \omega$.
 
 As above, one can define the $n$-dimensional affine space $K^n$. Let $I$ be an ideal in the polynomial ring $K[x_1, \dots, x_n]$, we can define the variety $V_I$ defined similarly to the complex case. Generally, the Nullstellensatz is not the case for an abstract $K[x_1, \dots, x_n]$, so we shall work with quotient rings $K[x_1, \dots, x_n]/I$. Let $f_1, \dots, f_m \in K[x_1, \dots, x_n]$, the \emph{finitely presented $K$-algebra} is the quotient ring $K[x_1, \dots, x_n]/(f_1, \dots, f_m)$. $(K - Alg)_{fp}$ is the category all finitely presented $K$-algebra. There is a contravariant adjointness between $(K - Alg)_{fp}$ and the corresponding varieties.
+
+
+\subsubsection{Sheaves of rings on a locale}
+
+This example is an example of both sheaves and quantales.
+
+Let $\mathcal{L}$ be a frame and $\mathcal{O} : L \to {\bf Ring}$ a sheaf of rings on $\mathcal{L}$. We show that $\operatorname{Idl}(\mathcal{O})$, a sheaf of ideals of $\mathcal{O}$ is a quantale.
+
+A presheaf $I$ on $\mathcal{L}$ is a \emph{presheaf of ideals} of $\mathcal{O}$ if for all $a \in \mathcal{L}$
+$I(a)$ is an ideal $\mathcal{O}(a)$. If $I$ is a sheaf, then $I$ is a sheaf of ideals, or ideal of $\mathcal{O}$. The set $\operatorname{Idl}(\mathcal{O})$ is the set of all ideals of $\mathcal{O}$.
+
+Let $I$ be a presheaf of ideals of $\mathcal{O}$, then the \emph{sheafification} $\langle I \rangle$ of $I$ is defined as, for all $a \in L$:
+\begin{center}
+$r \in \langle I \rangle(a)$ iff there exists a cover $\{ a_i \}_{i \in I}$ of $L$ with $r|a_i$ for all $i \in I$
+\end{center}
+
+$\langle I \rangle$ can be also defined explicitly as:
+\begin{center}
+$\langle I \rangle = \bigcap \{ J \in \operatorname{Idl}(\mathcal{O}) \: | \: I \subseteq J \}$
+\end{center}
+
+Consider a family $\{ I_j \}_{j \in J}$ of ideals where each $I_j \in \operatorname{Idl}(\mathcal{O})$, then the assignment $a \mapsto \sum \limits_{j \in J} I_j(a)$ is a presheaf, but it does not have to be a sheaf, but supremum in the lattice $\operatorname{Idl}(\mathcal{O})$ is defined as $\langle \sum \limits_{j \in J} I_j \rangle$.
+
+\section{Sheaves on a quantale}
 
 \section{Kripke-Joyal semantics and quantifiers via adjoint functors}
 
