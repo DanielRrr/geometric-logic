@@ -403,6 +403,90 @@ We define the non-commutative geometric logic with the following axioms and infe
 \end{flushright}
 \end{minipage}
 
+\section{Elementary topos}
+
+\subsection{Subobjects}
+
+Let $A, B \in \operatorname{Ob}(\mathcal{C})$. $A$ is said to be a subobject of $B$ iff there exists a monic arrow $h : A \hookrightarrow B$. The inclusion relation on objects is defined by ``inclusion'' on monic arrows.
+
+Let $f : A \hookrightarrow D$ and $g : B \hookrightarrow D$, then $f \subseteq g$ iff there exists an arrow $h : A \to B$ making this trianlge commute:
+
+\xymatrix{
+&&&&&& B \ar@{^{(}->}[dr]^{g} \\
+&&&&&&& D \\
+&&&&&& A \ar[uu]^{h} \ar@{^{(}->}[ur]_{f}
+}
+that is, $f = g \circ h$
+
+\begin{prop}
+Such an $h$ is monic.
+\end{prop}
+
+\begin{prop}
+$f \subseteq f$.
+\end{prop}
+
+\begin{proof}
+The following triangle obviously commutes:
+
+\xymatrix{
+&&&&&& A \ar@{^{(}->}[dr]^{f} \\
+&&&&&&& D \\
+&&&&&& A \ar[uu]^{{\bf id}_A} \ar@{^{(}->}[ur]_{f}
+}
+\end{proof}
+
+\begin{prop}
+$f \subseteq g$ and $g \subseteq k$ imply $f \subseteq k$.
+\end{prop}
+
+\begin{proof}
+The following triangle commutes:
+
+\xymatrix{
+&&&&&& C \ar@{^{(}->}[dr]^{k} \\
+&&&&&& B \ar[u]^i \: \ar@{^{(}->}[r]_{g} & D \\
+&&&&&& A \ar[u]^h \ar@{^{(}->}[ur]_{f}
+}
+Because of obvious calculations:
+\begin{center}
+$k \circ i \circ h = k \circ (i \circ h) = k \circ g = f$
+\end{center}
+\end{proof}
+
+We also say that $f \simeq g$, whenever $f \subseteq g$ and $g \subseteq f$. In such case we shall identify them and omit metamathematical nitpicking.
+
+Assume that a category $\mathcal{C}$ has a terminal object ${\bf 1}$, an arrow $x : {\bf 1} \to A$ is called an \emph{element} of $\mathcal{A}$.
+
+Let $\mathcal{C}$ be a category with a terminal object ${\bf 1}$. A \emph{subobject classifier} for $\mathcal{C}$ is an object $\Omega$ with an arrow $\top : {\bf 1} \to \Omega$ such that for each $f : A \hookrightarrow D$ there exists a unique arrow $\chi_f : D \to \Omega$ (the {\emph characterstic arrow} of $f$) making the following square a pullback:
+
+\xymatrix{
+&&&&&& A \: \ar[d]_{!} \ar@{^{(}->}[r]^f & D \ar[d]^{\exists! \chi_f} \\
+&&&&&& {\bf 1} \ar[r]_{\top} & \Omega
+}
+
+Consider ${\bf Top}$, the category of topological spaces. Although it is not an elementary topos ({\bf Top} has no exponentiation objects), however it has an open subspace classifier.
+The Sierpinski space $\Sigma$ is the space on the two-element set $2 = \{ 0, 1 \}$ with opens $\emptyset$, $2$ and $\{ 1 \}$. Let $D$ be a topological space and $A$ its open subspace, so the following diagram
+
+\xymatrix{
+&&&&&& A \: \ar[d]_{!} \ar@{^{(}->}[r] & D \ar[d]^{\chi_A} \\
+&&&&&& {\bf 1} \ar[r]_{\top} & \Sigma
+}
+
+says that there is a unique continuous function $\chi_A$ defined as
+\begin{center}
+$\chi_A(x) = \begin{cases} 1 \text{  if $x \in A$} \\ 0 \text{  otherwise} \end{cases} $
+\end{center}
+such that $A = \chi_A^{-1}({\bf 1})$.
+
+Also the Sierpinski allows us classifying closed subsets. Let $D$ be a topological space and $A$ a closed subspace of $D$. The following diagram
+
+\xymatrix{
+&&&&&& A \: \ar[d]_{!} \ar@{^{(}->}[r] & D \ar[d]^{\chi_A} \\
+&&&&&& {\bf 0} \ar[r]_{\bot} & \Sigma
+}
+says that there is a unique continuous function $\chi_A$ such that $A = \chi_A^{-1}({\bf 0})$.
+
 \section{Sheaves, Sites and Grothendieck toposes}
 
 Let $\mathcal{I} = (I, \theta)$ be a topological space. Consider $\theta$ as a poset. A {\emph presheaf} over $\mathcal{I}$ is a contravariant functor from $\theta$ to ${\bf Set}$.
@@ -528,6 +612,8 @@ A \emph{Grothendieck topology} on a category $\mathcal{C}$ is a function $J$ tha
 \item If $S \in J(C)$ and $R$ is a sieve of $C$ such that $h^*(R) \in J(D)$ for all $h : D \to C$, then $R \in J(C)$
 \end{enumerate}
 Also any $J(C)$ is upward closed.
+
+\subsection{Lawvere-Tierney topology}
 
 \subsection{Examples}
 
