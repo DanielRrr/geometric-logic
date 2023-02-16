@@ -485,7 +485,38 @@ Also the Sierpinski space also allows us classifying closed subspaces. Let $D$ b
 }
 says that there is a unique continuous function $\chi_A$ such that $A = \chi_A^{-1}({\bf 0})$.
 
-A category $\mathcal{C}$ is called an \emph{elementary topos}, if:
+As in the example with the Sierpinski space, we shall write $\chi_A$ for characterstic arrows instead of $\chi_f$ to make notation closer to usual set-theoretic mathematics.
+
+One can establish the criterion of subobject equality in term of a subobject classifier.
+
+\begin{lemma}
+
+Let $\mathcal{C}$ be a category with a subobject classifier $\Omega$, then for all $f : A \hookrightarrow D$ and $g : B \hookrightarrow D$, then
+
+\begin{center}
+$f \simeq g$ iff $\chi_A = \chi_B$
+\end{center}
+
+\end{lemma}
+
+\begin{proof}
+Suppose $\chi_A = \chi_B$. But the axioms of a subobject classifier, the following square is a pullback:
+
+\centerline{
+\xymatrix{
+B \ar@/_/[ddr]_{!} \ar@/^/[drr]^g
+\ar@{.>}[dr]^{k} \\
+& A \ar[d]_{!} \ar[r]^f
+& X \ar[d]^{\chi_A} \\
+& {\bf 1} \ar[r]_{\top} & \Omega }
+}
+
+By assumption, the outer square commutes, the inner square is a pullback, so we have a unique arrow $k$ that factors $g$ through $h$, so $g \subseteq f$. One can show that $f \subseteq g$ similarly.
+
+If $f \simeq g$, then $k$ is iso, so the outer square is a pullback, and that implies that $\chi_A$ is the unique character of $B$, so $\chi_A = \chi_B$.
+\end{proof}
+
+A category $\mathcal{C}$ is called an \emph{elementary topos} if:
 \begin{itemize}
 \item $\mathcal{C}$ is Cartesian closed,
 \item $\mathcal{C}$ has coproducts,
