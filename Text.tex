@@ -403,9 +403,7 @@ We define the non-commutative geometric logic with the following axioms and infe
 \end{flushright}
 \end{minipage}
 
-\section{Elementary topos}
-
-\subsection{Subobjects}
+\section{Elementary topoi}
 
 Let $A, B \in \operatorname{Ob}(\mathcal{C})$. $A$ is said to be a subobject of $B$ iff there exists a monic arrow $h : A \hookrightarrow B$. The inclusion relation on objects is defined by ``inclusion'' on monic arrows.
 
@@ -486,6 +484,14 @@ Also the Sierpinski space also allows us classifying closed subspaces. Let $D$ b
 &&&&&& {\bf 0} \ar[r]_{\bot} & \Sigma
 }
 says that there is a unique continuous function $\chi_A$ such that $A = \chi_A^{-1}({\bf 0})$.
+
+A category $\mathcal{C}$ is called an \emph{elementary topos}, if:
+\begin{itemize}
+\item $\mathcal{C}$ is Cartesian closed,
+\item $\mathcal{C}$ has coproducts,
+\item $\mathcal{C}$ has an initial object ${\bf 0}$,
+\item $\mathcal{C}$ has a subobject classifier $\Omega$.
+\end{itemize}
 
 \section{Sheaves, Sites and Grothendieck toposes}
 
