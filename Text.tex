@@ -73,7 +73,7 @@ A frame is a complete lattice $\mathcal{L} = (L, \wedge, \bigvee)$ such that, fo
 \begin{center}
 $a \wedge \bigvee A = \bigvee \{ a \wedge b \: | \: b \in A \}$
 \end{center}
-A frame homeomorphism is a map between frames that preserves $0$, $1$, $\wedge$ and $\bigvee$. The ${\bf Frm}$ is the category of all frames and homeomorphisms, the category of locales ${\bf Loc}$ is said to be the opposite category of the category of frames.
+A frame homomorphism is a map between frames that preserves $0$, $1$, $\wedge$ and $\bigvee$. The ${\bf Frm}$ is the category of all frames and homeomorphisms, the category of locales ${\bf Loc}$ is said to be the opposite category of the category of frames.
 
 The notion of a quantale generalises frames. A quantale $\mathcal{Q} = (Q, \cdot, \bigvee)$ is a complete lattice-ordered semigroup such that, for all $a \in Q$ and $A \subseteq Q$:
 \begin{center}
@@ -81,8 +81,6 @@ $a \cdot \bigvee A = \bigvee \{ a \cdot b \: | \: b \in A \}$
 
 $\bigvee A \cdot a = \bigvee \{ b \cdot a \: | \: b \in A \}$.
 \end{center}
-
-\subsection{Examples of locales}
 
 \subsection{Examples of quantales}
 
@@ -516,6 +514,21 @@ By assumption, the outer square commutes, the inner square is a pullback, so we 
 If $f \simeq g$, then $k$ is iso, so the outer square is a pullback, and that implies that $\chi_A$ is the unique character of $B$, so $\chi_A = \chi_B$.
 \end{proof}
 
+Moreover, we have:
+\begin{lemma}
+Let $\mathcal{C}$ be a locally small category with a terminal object and a subobject classifier $\Omega$. Let $A \in \operatorname{Ob}(\mathcal{C})$, define the set:
+
+\begin{center}
+$\operatorname{Sub}(A) = \{ B \in \operatorname{Ob}(\mathcal{C}) \: | \: B \hookrightarrow A \}$
+\end{center}
+
+then $\operatorname{Sub}(A) \cong \operatorname{Hom}_{\mathcal{C}}(A, \Omega)$
+\end{lemma}
+
+\begin{proof}
+Follows from the lemma above. The map $f : B \mapsto \chi_B$ establishes a bijection.
+\end{proof}
+
 A category $\mathcal{C}$ is called an \emph{elementary topos} if:
 \begin{itemize}
 \item $\mathcal{C}$ is Cartesian closed,
@@ -524,7 +537,86 @@ A category $\mathcal{C}$ is called an \emph{elementary topos} if:
 \item $\mathcal{C}$ has a subobject classifier $\Omega$.
 \end{itemize}
 
-\section{Sheaves, Sites and Grothendieck toposes}
+Moreover, every $\operatorname{Sub}(A)$ is a Heyting algebra, so one can extract truth arrows $\neg$, $\land$, $\vee$, $\Rightarrow$ and also the binary relation $\leq$ that reflect Heyting algebra operations and ordering. Let us define them explicitly. Let $\mathcal{E}$ be an elementary topos.
+\begin{itemize}
+\item $\neg : \Omega \to \Omega$ is the arrow making this square pullback:
+
+\centerline{
+\xymatrix{
+{\bf 1} \ar[r]^{\bot} \ar[d]_{id_A} & \Omega \ar[d]^{\neg} \\
+{\bf 1} \ar[r]_{\top} & \Omega
+}}
+
+where $\bot$ is the character of ${\bf 0}$ considered as a subobject of ${\bf 1}$:
+
+\centerline{
+\xymatrix{
+{\bf 0} \ar[r] \ar[d]_{!} & {\bf 1} \ar[d]^{\bot} \\
+{\bf 1} \ar[r]_{\top} & \Omega
+}}
+\item $\wedge : \Omega \times \Omega \to \Omega$ is the character of the product arrow $(\top, \top) : {\bf 1} \to \Omega \times \Omega$:
+
+\centerline{
+\xymatrix{
+{\bf 1} \ar[rr]^{(\top, \top)} \ar[d]_{id_{\bf 1}} && \Omega \times \Omega \ar[d]^{\wedge} \\
+{\bf 1} \ar[rr]_{\top} && \Omega
+}
+}
+\item Ordering relation is a monomorphism $e : \: \leq \: \hookrightarrow \Omega \times \Omega$, which is the equaliser of
+
+\centerline{
+\xymatrix{
+\Omega \times \Omega \ar@/^/[rr]^{\wedge} \ar@/_/[rr]_{\pi_1} && \Omega
+}
+}
+
+\item $\vee : \Omega \times \Omega \to \Omega$ is the character of the arrow $[(\top, id_{\Omega}),(id_{\Omega}, \top)] : \Omega + \Omega \to \Omega \times \Omega$
+\end{itemize}
+
+\begin{lemma}
+Let $\mathcal{E}$ be an elementary topos with a subobject classifier $\top : {\bf 1} \to \Omega$ and let $D \in \operatorname{Ob}(\mathcal{E})$, then the structure $(\operatorname{Hom}_{\mathcal{E}}(D, \Omega), \wedge, \vee, \Rightarrow, \neg)$ is a Heyting algebra, where operations are defined by:
+
+\begin{itemize}
+\item $\neg p = \neg \circ p$,
+\item $p \wedge q = \wedge \circ (p, q)$,
+\item $p \vee q = \vee \circ (p, q)$,
+\item $p \Rightarrow q = \: \Rightarrow \: \circ \: (p, q)$.
+\end{itemize}
+\end{lemma}
+
+\subsection{Sites over elementary topoi}
+
+Let $\mathcal{E}$ be an elementary topos. A Lawvere-Tierney topology on $\mathcal{E}$ is an arrow $j : \Omega \to \Omega$ making the following diagrams commute:
+
+\centerline{
+\xymatrix{
+{\bf 1} \ar[d]_{\top} \ar[dr]^{\top} && \Omega \ar[d]_{j} \ar[dr]^j && \Omega \times \Omega \ar[d]_{j \times j} \ar[r]^{\land} & \Omega \ar[d]^j \\
+\Omega \ar[r]_{j} & \Omega & \Omega \ar[r]_{j} & \Omega & \Omega \times \Omega \ar[r]_{\land} & \Omega
+}
+}
+
+A tuple $\mathcal{E}_j = (\mathcal{E}, j)$ is called an elementary site.
+
+\begin{prop}
+The map $n : h \mapsto j \circ h$ is a nucleus on $\operatorname{Hom}_\mathcal{E}(D, \Omega)$
+\end{prop}
+
+\begin{lemma}
+Let $\mathcal{P}$ be a poset, then one define an elementary site on the category of set-valued functors $Set^{\mathcal{P}}$.
+\end{lemma}
+
+\begin{proof}
+First of all, let us show that $Set^{\mathcal{P}}$ is an elementary topos.
+Define $F_{pq}$ as an arrow $F(p) \to F(q)$, an image of $p \leq q$ in $\mathcal{P}$.
+
+TODO: complete this proof
+\end{proof}
+
+\subsection{An example of an elementary site}
+
+\section{Grothendieck topology}
+
+\subsection{Sheaves and presheaves}
 
 Let $\mathcal{I} = (I, \theta)$ be a topological space. Consider $\theta$ as a poset. A {\emph presheaf} over $\mathcal{I}$ is a contravariant functor from $\theta$ to ${\bf Set}$.
 
@@ -714,7 +806,6 @@ Let $K$ be a commutative ring with unit, define a ring $K[a^{-1}]$ of quotients 
 
 As above, one can define the $n$-dimensional affine space $K^n$. Let $I$ be an ideal in the polynomial ring $K[x_1, \dots, x_n]$, we can define the variety $V_I$ defined similarly to the complex case. Generally, the Nullstellensatz is not the case for an abstract $K[x_1, \dots, x_n]$, so we shall work with quotient rings $K[x_1, \dots, x_n]/I$. Let $f_1, \dots, f_m \in K[x_1, \dots, x_n]$, the \emph{finitely presented $K$-algebra} is the quotient ring $K[x_1, \dots, x_n]/(f_1, \dots, f_m)$. $(K - Alg)_{fp}$ is the category all finitely presented $K$-algebra. There is a contravariant adjointness between $(K - Alg)_{fp}$ and the corresponding varieties.
 
-
 \subsubsection{Sheaves of rings on a locale}
 
 This example is an example of both sheaves and quantales.
@@ -740,15 +831,9 @@ Now we define an example of such a sheaf from the Zariski space, the dual space 
 
 TODO: complete this subsection
 
-\section{Sheaves on a quantale}
-
 \section{Kripke-Joyal semantics and quantifiers via adjoint functors}
 
-\section{Internal logic}
-
 \section{Geometric morphisms}
-
-\section{Geometric logic}
 
 \section{Kripke-Joyal semantics for quantales and non-commutative geometric theories}
 
