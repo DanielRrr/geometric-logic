@@ -350,19 +350,20 @@ We define the non-commutative geometric logic with the following axioms and infe
 
 \begin{prooftree}
 \AxiomC{$ $}
-\UnaryInfC{$\varphi \bullet (\psi \bullet \theta) \dashv \vdash (\varphi \bullet \psi) \bullet \theta$}
+\UnaryInfC{$\bigvee \Phi \bullet \varphi \vdash \bigvee \limits_{\phi \in \Phi} (\phi \bullet \varphi)$}
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$\varphi \vdash \psi$}
 \RightLabel{$x \notin FV(\varphi)$}
+\doubleLine
 \UnaryInfC{$\exists x \varphi \vdash \psi$}
 \end{prooftree}
 
 \begin{prooftree}
-  \AxiomC{$\varphi \vdash \psi$}
-  \AxiomC{$\psi \vdash \theta$}
-  \BinaryInfC{$\varphi \vdash \theta$}
+\AxiomC{$ $}
+\RightLabel{$x \notin FV(\varphi)$}
+\UnaryInfC{$\exists x \psi \bullet \varphi \vdash \exists x (\psi \bullet \varphi$)}
 \end{prooftree}
 
 \end{flushleft}
@@ -387,19 +388,24 @@ We define the non-commutative geometric logic with the following axioms and infe
 \end{prooftree}
 
 \begin{prooftree}
-\AxiomC{$\exists x \varphi \vdash \psi$}
-\RightLabel{$x \notin FV(\varphi)$}
-\UnaryInfC{$\varphi \vdash \psi$}
+\AxiomC{$ $}
+\UnaryInfC{$\varphi \bullet (\psi \bullet \theta) \dashv \vdash (\varphi \bullet \psi) \bullet \theta$}
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$ $}
-\RightLabel{$x \notin FV(\psi)$}
+\RightLabel{$x \notin FV(\varphi)$}
 \UnaryInfC{$\varphi \bullet \exists x \psi \vdash \exists x (\varphi \bullet \phi$)}
 \end{prooftree}
 
 \end{flushright}
 \end{minipage}
+
+\begin{prooftree}
+  \AxiomC{$\varphi \vdash \psi$}
+  \AxiomC{$\psi \vdash \theta$}
+  \BinaryInfC{$\varphi \vdash \theta$}
+\end{prooftree}
 
 \section{Elementary topoi}
 
@@ -606,13 +612,17 @@ Let $\mathcal{P}$ be a poset, then one define an elementary site on the category
 \end{lemma}
 
 \begin{proof}
+Define $F_{pq}$ as an arrow $F(p) \to F(q)$, an image of $p \leq q$ in $Set$.
+
 First of all, let us show that $Set^{\mathcal{P}}$ is an elementary topos.
-Define $F_{pq}$ as an arrow $F(p) \to F(q)$, an image of $p \leq q$ in $\mathcal{P}$.
-
-TODO: complete this proof
+\begin{itemize}
+\item Subobject classifier
+\item Pullbacks
+\item Exponentiation
+\item Terminal object:
+The terminal object is the constant functor ${\bf 1 } : \mathcal{P} \to Set$ such that ${\bf 1} : \underline{\:\:} \mapsto \{ \emptyset \}$.
+\end{itemize}
 \end{proof}
-
-\subsection{An example of an elementary site}
 
 \section{Grothendieck topology}
 
