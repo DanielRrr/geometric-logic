@@ -255,6 +255,28 @@ By mapping $x \mapsto (x]$.
 
 \section{Geometric logic and geometric categories}
 
+The first order signature $\Sigma$ that we are going to consider in this section consists of the following data:
+\begin{itemize}
+\item A set $\Sigma-\operatorname{Sort}$ of sorts,
+\item A set $\Sigma-\operatorname{Fun}$ of function symbols having the form $f : A_1 \times \dots \times A_n \to B$ where $A_1, \dots, A_n, B$ are sorts,
+\item A set $\Sigma-\operatorname{Fun}$ of predicate symbols having the form $R \hookrightarrow A_1 \times \dots \times A_n$, where $A_1, \dots, A_n$ are sorts,
+\end{itemize}
+
+The collection of terms is defined inductively:
+\begin{itemize}
+\item A variable $x^A$ of sort $A$ is a term of sort $A$,
+\item If $t_1 : A_1, \dots, t_n : A_n$ are terms of sorts $A_1, \dots, A_n$ and $f : A_1 \times \dots \times A_n \to B$ is a function symbol, then $f(t_1, \dots, t_n) : B$ is a term of sort $B$.
+\end{itemize}
+
+The set of formulas is also defined inductively:
+\begin{itemize}
+\item Let $t_1 : A_1, \dots, t_n : A_n$ be terms of of sorts $A_1, \dots, A_n$ and let $R \hookrightarrow A_1 \times \dots \times A_n$ be a predicate symbol, then $R(t_1, \dots, t_n)$ is an atomic formula,
+\item Let $t_1, t_2$ be terms of sort $A$, then $t_1 = t_2$ is an atomic formula,
+\item If $\varphi$ and $\psi$ are formulas, so is $(\varphi \wedge \psi)$.
+\item Let $I$ be an index set and $\{ \varphi_i \: | \: i \in I \}$ a family of formulas such that $|\operatorname{FV}((\varphi_i)_{i \in I})| < \omega$, then $\bigvee \limits_{i \in I} \varphi_i$ is a formula
+\item If $\varphi$ is a formula and $x \in \operatorname{FV}(\varphi)$, then $\exists x \varphi$ is a formula and $\operatorname{FV}(\exists x \varphi) = \operatorname{FV}(\varphi) \setminus \{ x \}$.
+\end{itemize}
+
 \begin{prooftree}
 \AxiomC{$ $}
 \UnaryInfC{$\varphi \rightarrow \varphi$}
@@ -329,6 +351,8 @@ By mapping $x \mapsto (x]$.
 \section{Non-commutative geometric logic, non-commutative geometric categories and completeness}
 
 We define the non-commutative geometric logic with the following axioms and inference rules.
+
+The definition of a language is identical to the corresponding definition from the previous section, but we replace $\land$ with $\bullet$.
 
 \begin{prooftree}
 \AxiomC{$ $}
