@@ -57,6 +57,7 @@
 \date{}
 \title{Notes on Geometric logic}
 
+\setcounter{section}{-1}
 \begin{document}
 
 \maketitle
@@ -66,6 +67,50 @@
 \newpage
 
 \nocite{*}
+
+\section{Preliminaries}
+
+\subsection{(co)Limits}
+
+Let $\mathcal{C}$ be a category and $\mathcal{J}$ a small category. A \emph{diagram} $D$ is a functor $D : \mathcal{J} \to \mathcal{C}$, that is, informally, a diagram is a $\mathcal{J}$-indexed collection of $\mathcal{C}$-objects and some morphisms between them. A \emph{cone} for diagram $D$ consists of a $\mathcal{C}$-object $C$ with a $C$-arrow $f_i : C \to D(i)$ for $i \in \operatorname{Ob}(\mathcal{J})$ such that the following triangle commutes, for each $i, j \in \operatorname{Ob}(\mathcal{J})$:
+
+\centerline{
+\xymatrix{
+D(i) \ar[rr]^g && D(j) \\
+& C \ar[ul]^{f_i} \ar[ur]_{f_j}
+}
+}
+For $D$-cones we will use notation $\{f_i : C \to D(i) \}$
+
+A \emph{limit} for a diagram $D$ is a $D$-cone $\{f_i : C \to D(i) \}$ such that for any other $D$-cone $\{f_i' : C' \to D(i) \}$ there exists a unique arrow $f : C' \to C$ making the following triangle commute for every $i \in \operatorname{Ob}(\mathcal{J})$:
+
+\centerline{
+\xymatrix{
+& D(i) \\
+C' \ar[ur]^{f_i'} \ar[rr]_{\exists! f} && C \ar[ul]_{f_i}
+}
+}
+
+By dualisation one can define co-cone and co-limits. A \emph{co-cone} for diagram $D$ consists of a $\mathcal{C}$-object $C$ with a $C$-arrow $f_i : D(i) \to C$ for $i \in \operatorname{Ob}(\mathcal{J})$ such that the following triangle commutes, for each $i, j \in \operatorname{Ob}(\mathcal{J})$:
+
+\centerline{
+\xymatrix{
+D(i) \ar[dr]_{f_i} \ar[rr]^g && D(j) \ar[dl]^{f_j} \\
+& C
+}
+}
+
+A co-limit is a co-cone $\{ f_i : D(i) \to C \}$ such that for any other co-cone $\{ f_i : D(i) \to C' \}$ there exists a unique arrow $f : C \to C'$ making the following triangle commute for each $i \in \operatorname{Ob}(\mathcal{J})$:
+\centerline{
+\xymatrix{
+& D(i) \ar[dr]_{f_i} \ar[dl]^{f_i'} \\
+C \ar[rr]_{\exists ! f} && C'
+}
+}
+
+\subsection{(co)equalisers}
+\subsection{Pullbacks and pushouts}
+\subsection{Monoidal categories}
 
 \section{Locales and quantales}
 
@@ -277,39 +322,55 @@ The set of formulas is also defined inductively:
 \item If $\varphi$ is a formula and $x \in \operatorname{FV}(\varphi)$, then $\exists x \varphi$ is a formula and $\operatorname{FV}(\exists x \varphi) = \operatorname{FV}(\varphi) \setminus \{ x \}$.
 \end{itemize}
 
+\begin{enumerate}
+\item The set of \emph{atomic} formulas over $\Sigma$ is the set of formulas closed under relations and equality,
+\item The set of \emph{Horn} formulas over $\Sigma$ is the set of formulas closed under finite conjunction,
+\item The set of \emph{regular} formulas over $\Sigma$ is the set of Horn formulas closed under existential quantification,
+\item The set of \emph{coherent} formulas is the set of regular formulas closed under finite disjunction,
+\item The class of \emph{geometric} formulas is the class of coherent formulas closed under infinite disjunction.
+\end{enumerate}
+
+A \emph{context} is a finite list $\vec{x} = (x_1, \dots, x_n)$. A formula $\varphi$ in a context $\vec{x}$ if its every free variable belongs to $\vec{x}$. We shall use the standard notation $\varphi(\vec{x})$.
+
+\begin{enumerate}
+\item A sequent over signature $\Sigma$ is a pair of formulas $\varphi \vdash_{\vec{x}} \psi$ such that their free variables occur in $\vec{x}$,
+\item A sequent $\varphi \vdash_{\vec{x}} \psi$ is \emph{atomic} (\emph{Horn}, \emph{regular}, \emph{coherent}, \emph{geometric}) if $\varphi$ and $\psi$ are  \emph{atomic} (\emph{Horn}, \emph{regular}, \emph{coherent}, \emph{geometric}).
+\end{enumerate}
+
+The minimal geometric logic is the minimal theory $\mathbb{T}$ that contains the following axioms and is closed under the inference rules:
 \begin{prooftree}
 \AxiomC{$ $}
-\UnaryInfC{$\varphi \rightarrow \varphi$}
+\UnaryInfC{$\varphi \vdash_{\vec{x}} \varphi$}
 \end{prooftree}
 
 \begin{minipage}{0.5\textwidth}
 \begin{flushleft}
 \begin{prooftree}
 \AxiomC{$ $}
-\UnaryInfC{$\varphi \vdash \top$}
+\UnaryInfC{$\varphi \vdash_{\vec{x}} \top$}
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$ $}
-\UnaryInfC{$\varphi_1 \land \varphi_2 \vdash \varphi_i$}
+\UnaryInfC{$\varphi_1 \land \varphi_2 \vdash_{\vec{x}}  \varphi_i$}
 \end{prooftree}
 
 \begin{prooftree}
-  \AxiomC{$\varphi \vdash \psi$}
-  \AxiomC{$\varphi \vdash \theta$}
-  \BinaryInfC{$\varphi \vdash \psi \land \theta$}
+  \AxiomC{$\varphi \vdash_{\vec{x}} \psi$}
+  \AxiomC{$\varphi \vdash_{\vec{x}} \theta$}
+  \BinaryInfC{$\varphi \vdash_{\vec{x}} \psi \land \theta$}
 \end{prooftree}
 
 \begin{prooftree}
-\AxiomC{$\varphi \vdash \psi$}
-\RightLabel{$x \notin FV(\varphi)$}
-\UnaryInfC{$\exists x \varphi \vdash \psi$}
+\AxiomC{$\varphi \vdash\vdash_{\vec{x}, y}  \psi$}
+\RightLabel{$y \notin FV(\varphi)$}
+\UnaryInfC{$\exists y \varphi \vdash \psi$}
 \end{prooftree}
 
 \begin{prooftree}
-  \AxiomC{$\varphi \vdash \psi$}
-  \AxiomC{$\psi \vdash \theta$}
-  \BinaryInfC{$\varphi \vdash \theta$}
+  \AxiomC{$\varphi \vdash_{\vec{x}} \psi$}
+  \AxiomC{$\psi \vdash_{\vec{x}} \theta$}
+  \BinaryInfC{$\varphi \vdash_{\vec{x}} \theta$}
 \end{prooftree}
 
 \end{flushleft}
@@ -318,35 +379,51 @@ The set of formulas is also defined inductively:
 \begin{flushright}
 \begin{prooftree}
 \AxiomC{$ $}
-\RightLabel{$\varphi \in \Phi$}
-\UnaryInfC{$\varphi \vdash \bigvee \Phi$}
+\RightLabel{$\varphi(\vec{x}) \in \Phi$}
+\UnaryInfC{$\varphi \vdash_{\vec{x}} \bigvee \Phi$}
 \end{prooftree}
 
 \begin{prooftree}
-\AxiomC{$\varphi \vdash \psi$}
+\AxiomC{$\varphi \vdash_{\vec{x}} \psi$}
 \RightLabel{$\varphi \in \Phi$}
-\UnaryInfC{$\bigvee \Phi \vdash \psi$}
+\UnaryInfC{$\bigvee \Phi \vdash_{\vec{x}} \psi$}
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$ $}
-\UnaryInfC{$\varphi \land \bigvee \Phi \vdash \bigvee \limits_{\phi \in \Phi} (\varphi \land \phi$)}
+\UnaryInfC{$\varphi \land \bigvee \Phi \vdash_{\vec{x}} \bigvee \limits_{\phi \in \Phi} (\varphi \land \phi$)}
 \end{prooftree}
 
 \begin{prooftree}
-\AxiomC{$\exists x \varphi \vdash \psi$}
-\RightLabel{$x \notin FV(\varphi)$}
-\UnaryInfC{$\varphi \vdash \psi$}
+\AxiomC{$\exists y \varphi \vdash_{\vec{x}} \psi$}
+\RightLabel{$y \notin FV(\varphi)$}
+\UnaryInfC{$\varphi \vdash_{\vec{x}, y} \psi$}
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$ $}
 \RightLabel{$x \notin FV(\psi)$}
-\UnaryInfC{$\varphi \land \exists x \psi \vdash \exists x (\varphi \land \phi$)}
+\UnaryInfC{$\varphi \land \exists x \psi \vdash_{\vec{x}} \exists x (\varphi \land \phi$)}
 \end{prooftree}
 
 \end{flushright}
 \end{minipage}
+
+Let $\mathcal{C}$ be a category with finite products and $\Sigma$ a signature. A $\Sigma$-structure $M$ over $\mathcal{C}$ in $\mathcal{C}$ consists of the following data:
+\begin{enumerate}
+\item Let $A$ be a sort, then $M A \in \operatorname{Ob}(\mathcal{A})$,
+\item Let $A_1, A_2, \dots, A_n, B$ be sorts and $f$ a function symbol of sort $A_1 \times A_2 \times \dots \times A_n \to B$, then $M f : M A_1 \times M A_2 \times \dots \times M A_n \to M B$ is a $\mathcal{C}$-arrow,
+\item Let $A_1, A_2, \dots, A_n$ be sorts and $R \hookrightarrow A_1 \times A_2 \times \dots \times A_n$ a relation symbol, then $M R \hookrightarrow M A_1 \times M A_2 \times \dots \times M A_n$ is a subobject.
+\end{enumerate}
+
+Let $M, N$ be $\Sigma$-structures over $\mathcal{C}$, then a $\Sigma$-structure homomorphism $h : M \to N$ is a collection of arrows $h : M A \to N A$ for each $A \in \operatorname{Ob}(\mathcal{C})$ making the following diagrams commute for any function symbol $f$ and any relation symbol $R$:
+
+\centerline{
+\xymatrix{
+M A_1 \times \dots \times M A_n \ar[rr]^{M f} \ar[d]_{h_{A_1} \times \dots \times h_{A_n}} && M B \ar[d]^{h_B} && M R \ar[d]_{h_R} \:\: \ar@{^{(}->}[rr] && M A_1 \times \dots \times M A_n \ar[d]^{h_{A_1} \times \dots \times h_{A_n}} \\
+N A_1 \times \dots \times N A_n \ar[rr]_{N f} && N B && N R \:\: \ar@{^{(}->}[rr] && N A_1 \times \dots \times N A_n
+}
+}
 
 \section{Non-commutative geometric logic, non-commutative geometric categories and completeness}
 
