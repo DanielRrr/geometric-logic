@@ -112,6 +112,224 @@ C \ar[rr]_{\exists ! f} && C'
 \subsection{Pullbacks and pushouts}
 \subsection{Monoidal categories}
 
+\section{Elementary topoi}
+
+Let $A, B \in \operatorname{Ob}(\mathcal{C})$. $A$ is said to be a subobject of $B$ iff there exists a monic arrow $h : A \hookrightarrow B$. The inclusion relation on objects is defined by ``inclusion'' on monic arrows.
+
+Let $f : A \hookrightarrow D$ and $g : B \hookrightarrow D$, then $f \subseteq g$ iff there exists an arrow $h : A \to B$ making this trianlge commute:
+
+\xymatrix{
+&&&&&& B \ar@{^{(}->}[dr]^{g} \\
+&&&&&&& D \\
+&&&&&& A \ar[uu]^{h} \ar@{^{(}->}[ur]_{f}
+}
+that is, $f = g \circ h$
+
+\begin{prop}
+Such an $h$ is monic.
+\end{prop}
+
+\begin{prop}
+$f \subseteq f$.
+\end{prop}
+
+\begin{proof}
+The following triangle obviously commutes:
+
+\xymatrix{
+&&&&&& A \ar@{^{(}->}[dr]^{f} \\
+&&&&&&& D \\
+&&&&&& A \ar[uu]^{{\bf id}_A} \ar@{^{(}->}[ur]_{f}
+}
+\end{proof}
+
+\begin{prop}
+$f \subseteq g$ and $g \subseteq k$ imply $f \subseteq k$.
+\end{prop}
+
+\begin{proof}
+The following triangle commutes:
+
+\xymatrix{
+&&&&&& C \ar@{^{(}->}[dr]^{k} \\
+&&&&&& B \ar[u]^i \: \ar@{^{(}->}[r]_{g} & D \\
+&&&&&& A \ar[u]^h \ar@{^{(}->}[ur]_{f}
+}
+Because of obvious calculations:
+\begin{center}
+$k \circ i \circ h = k \circ (i \circ h) = k \circ g = f$
+\end{center}
+\end{proof}
+
+We also say that $f \simeq g$, whenever $f \subseteq g$ and $g \subseteq f$. In such case we shall identify them and omit metamathematical nitpicking.
+
+Assume that a category $\mathcal{C}$ has a terminal object ${\bf 1}$, an arrow $x : {\bf 1} \to A$ is called an \emph{element} of $\mathcal{A}$.
+
+Let $\mathcal{C}$ be a category with a terminal object ${\bf 1}$. A \emph{subobject classifier} for $\mathcal{C}$ is an object $\Omega$ with an arrow $\top : {\bf 1} \to \Omega$ such that for each $f : A \hookrightarrow D$ there exists a unique arrow $\chi_f : D \to \Omega$ (the {\emph characterstic arrow} of $f$) making the following square a pullback:
+
+\xymatrix{
+&&&&&& A \: \ar[d]_{!} \ar@{^{(}->}[r]^f & D \ar[d]^{\exists! \chi_f} \\
+&&&&&& {\bf 1} \ar[r]_{\top} & \Omega
+}
+
+Consider ${\bf Top}$, the category of topological spaces. Although it is not an elementary topos ({\bf Top} has no exponentiation objects), however it has an open subspace classifier.
+The Sierpinski space $\Sigma$ is the space on the two-element set $2 = \{ 0, 1 \}$ with opens $\emptyset$, $2$ and $\{ 1 \}$. Let $D$ be a topological space and $A$ its open subspace, so the following diagram
+
+\xymatrix{
+&&&&&& A \: \ar[d]_{!} \ar@{^{(}->}[r] & D \ar[d]^{\chi_A} \\
+&&&&&& {\bf 1} \ar[r]_{\top} & \Sigma
+}
+
+says that there is a unique continuous function $\chi_A$ defined as
+\begin{center}
+$\chi_A(x) = \begin{cases} 1 \text{  if $x \in A$} \\ 0 \text{  otherwise} \end{cases} $
+\end{center}
+such that $A = \chi_A^{-1}({\bf 1})$.
+
+Also the Sierpinski space also allows us classifying closed subspaces. Let $D$ be a topological space and $A$ a closed subspace of $D$. The following diagram
+
+\xymatrix{
+&&&&&& A \: \ar[d]_{!} \ar@{^{(}->}[r] & D \ar[d]^{\chi_A} \\
+&&&&&& {\bf 0} \ar[r]_{\bot} & \Sigma
+}
+says that there is a unique continuous function $\chi_A$ such that $A = \chi_A^{-1}({\bf 0})$.
+
+As in the example with the Sierpinski space, we shall write $\chi_A$ for characterstic arrows instead of $\chi_f$ to make notation closer to usual set-theoretic mathematics.
+
+One can establish the criterion of subobject equality in term of a subobject classifier.
+
+\begin{lemma}
+
+Let $\mathcal{C}$ be a category with a subobject classifier $\Omega$, then for all $f : A \hookrightarrow D$ and $g : B \hookrightarrow D$, then
+
+\begin{center}
+$f \simeq g$ iff $\chi_A = \chi_B$
+\end{center}
+
+\end{lemma}
+
+\begin{proof}
+Suppose $\chi_A = \chi_B$. But the axioms of a subobject classifier, the following square is a pullback:
+
+\centerline{
+\xymatrix{
+B \ar@/_/[ddr]_{!} \ar@/^/[drr]^g
+\ar@{.>}[dr]^{k} \\
+& A \ar[d]_{!} \ar[r]^f
+& X \ar[d]^{\chi_A} \\
+& {\bf 1} \ar[r]_{\top} & \Omega }
+}
+
+By assumption, the outer square commutes, the inner square is a pullback, so we have a unique arrow $k$ that factors $g$ through $h$, so $g \subseteq f$. One can show that $f \subseteq g$ similarly.
+
+If $f \simeq g$, then $k$ is iso, so the outer square is a pullback, and that implies that $\chi_A$ is the unique character of $B$, so $\chi_A = \chi_B$.
+\end{proof}
+
+Moreover, we have:
+\begin{lemma}
+Let $\mathcal{C}$ be a locally small category with a terminal object and a subobject classifier $\Omega$. Let $A \in \operatorname{Ob}(\mathcal{C})$, define the set:
+
+\begin{center}
+$\operatorname{Sub}(A) = \{ B \in \operatorname{Ob}(\mathcal{C}) \: | \: B \hookrightarrow A \}$
+\end{center}
+
+then $\operatorname{Sub}(A) \cong \operatorname{Hom}_{\mathcal{C}}(A, \Omega)$
+\end{lemma}
+
+\begin{proof}
+Follows from the lemma above. The map $f : B \mapsto \chi_B$ establishes a bijection.
+\end{proof}
+
+A category $\mathcal{C}$ is called an \emph{elementary topos} if:
+\begin{itemize}
+\item $\mathcal{C}$ is Cartesian closed,
+\item $\mathcal{C}$ has coproducts,
+\item $\mathcal{C}$ has an initial object ${\bf 0}$,
+\item $\mathcal{C}$ has a subobject classifier $\Omega$.
+\end{itemize}
+
+Moreover, every $\operatorname{Sub}(A)$ is a Heyting algebra, so one can extract truth arrows $\neg$, $\land$, $\vee$, $\Rightarrow$ and also the binary relation $\leq$ that reflect Heyting algebra operations and ordering. Let us define them explicitly. Let $\mathcal{E}$ be an elementary topos.
+\begin{itemize}
+\item $\neg : \Omega \to \Omega$ is the arrow making this square pullback:
+
+\centerline{
+\xymatrix{
+{\bf 1} \ar[r]^{\bot} \ar[d]_{id_A} & \Omega \ar[d]^{\neg} \\
+{\bf 1} \ar[r]_{\top} & \Omega
+}}
+
+where $\bot$ is the character of ${\bf 0}$ considered as a subobject of ${\bf 1}$:
+
+\centerline{
+\xymatrix{
+{\bf 0} \ar[r] \ar[d]_{!} & {\bf 1} \ar[d]^{\bot} \\
+{\bf 1} \ar[r]_{\top} & \Omega
+}}
+\item $\wedge : \Omega \times \Omega \to \Omega$ is the character of the product arrow $(\top, \top) : {\bf 1} \to \Omega \times \Omega$:
+
+\centerline{
+\xymatrix{
+{\bf 1} \ar[rr]^{(\top, \top)} \ar[d]_{id_{\bf 1}} && \Omega \times \Omega \ar[d]^{\wedge} \\
+{\bf 1} \ar[rr]_{\top} && \Omega
+}
+}
+\item Ordering relation is a monomorphism $e : \: \leq \: \hookrightarrow \Omega \times \Omega$, which is the equaliser of
+
+\centerline{
+\xymatrix{
+\Omega \times \Omega \ar@/^/[rr]^{\wedge} \ar@/_/[rr]_{\pi_1} && \Omega
+}
+}
+
+\item $\vee : \Omega \times \Omega \to \Omega$ is the character of the arrow $[(\top, id_{\Omega}),(id_{\Omega}, \top)] : \Omega + \Omega \to \Omega \times \Omega$
+\end{itemize}
+
+\begin{lemma}
+Let $\mathcal{E}$ be an elementary topos with a subobject classifier $\top : {\bf 1} \to \Omega$ and let $D \in \operatorname{Ob}(\mathcal{E})$, then the structure $(\operatorname{Hom}_{\mathcal{E}}(D, \Omega), \wedge, \vee, \Rightarrow, \neg)$ is a Heyting algebra, where operations are defined by:
+
+\begin{itemize}
+\item $\neg p = \neg \circ p$,
+\item $p \wedge q = \wedge \circ (p, q)$,
+\item $p \vee q = \vee \circ (p, q)$,
+\item $p \Rightarrow q = \: \Rightarrow \: \circ \: (p, q)$.
+\end{itemize}
+\end{lemma}
+
+\subsection{Sites over elementary topoi}
+
+Let $\mathcal{E}$ be an elementary topos. A Lawvere-Tierney topology on $\mathcal{E}$ is an arrow $j : \Omega \to \Omega$ making the following diagrams commute:
+
+\centerline{
+\xymatrix{
+{\bf 1} \ar[d]_{\top} \ar[dr]^{\top} && \Omega \ar[d]_{j} \ar[dr]^j && \Omega \times \Omega \ar[d]_{j \times j} \ar[r]^{\land} & \Omega \ar[d]^j \\
+\Omega \ar[r]_{j} & \Omega & \Omega \ar[r]_{j} & \Omega & \Omega \times \Omega \ar[r]_{\land} & \Omega
+}
+}
+
+A tuple $\mathcal{E}_j = (\mathcal{E}, j)$ is called an elementary site.
+
+\begin{prop}
+The map $n : h \mapsto j \circ h$ is a nucleus on $\operatorname{Hom}_\mathcal{E}(D, \Omega)$
+\end{prop}
+
+\begin{lemma}
+Let $\mathcal{P}$ be a poset, then one define an elementary site on the category of set-valued functors $Set^{\mathcal{P}}$.
+\end{lemma}
+
+\begin{proof}
+Define $F_{pq}$ as an arrow $F(p) \to F(q)$, an image of $p \leq q$ in $Set$.
+
+First of all, let us show that $Set^{\mathcal{P}}$ is an elementary topos.
+\begin{itemize}
+\item Subobject classifier
+\item Pullbacks
+\item Exponentiation
+\item Terminal object:
+The terminal object is the constant functor ${\bf 1 } : \mathcal{P} \to Set$ such that ${\bf 1} : \underline{\:\:} \mapsto \{ \emptyset \}$.
+\end{itemize}
+\end{proof}
+
+
 \section{Locales and quantales}
 
 A frame is a complete lattice $\mathcal{L} = (L, \wedge, \bigvee)$ such that, for all $a \in L$ and $A \subseteq L$:
@@ -507,223 +725,6 @@ The definition of a language is identical to the corresponding definition from t
   \AxiomC{$\psi \vdash \theta$}
   \BinaryInfC{$\varphi \vdash \theta$}
 \end{prooftree}
-
-\section{Elementary topoi}
-
-Let $A, B \in \operatorname{Ob}(\mathcal{C})$. $A$ is said to be a subobject of $B$ iff there exists a monic arrow $h : A \hookrightarrow B$. The inclusion relation on objects is defined by ``inclusion'' on monic arrows.
-
-Let $f : A \hookrightarrow D$ and $g : B \hookrightarrow D$, then $f \subseteq g$ iff there exists an arrow $h : A \to B$ making this trianlge commute:
-
-\xymatrix{
-&&&&&& B \ar@{^{(}->}[dr]^{g} \\
-&&&&&&& D \\
-&&&&&& A \ar[uu]^{h} \ar@{^{(}->}[ur]_{f}
-}
-that is, $f = g \circ h$
-
-\begin{prop}
-Such an $h$ is monic.
-\end{prop}
-
-\begin{prop}
-$f \subseteq f$.
-\end{prop}
-
-\begin{proof}
-The following triangle obviously commutes:
-
-\xymatrix{
-&&&&&& A \ar@{^{(}->}[dr]^{f} \\
-&&&&&&& D \\
-&&&&&& A \ar[uu]^{{\bf id}_A} \ar@{^{(}->}[ur]_{f}
-}
-\end{proof}
-
-\begin{prop}
-$f \subseteq g$ and $g \subseteq k$ imply $f \subseteq k$.
-\end{prop}
-
-\begin{proof}
-The following triangle commutes:
-
-\xymatrix{
-&&&&&& C \ar@{^{(}->}[dr]^{k} \\
-&&&&&& B \ar[u]^i \: \ar@{^{(}->}[r]_{g} & D \\
-&&&&&& A \ar[u]^h \ar@{^{(}->}[ur]_{f}
-}
-Because of obvious calculations:
-\begin{center}
-$k \circ i \circ h = k \circ (i \circ h) = k \circ g = f$
-\end{center}
-\end{proof}
-
-We also say that $f \simeq g$, whenever $f \subseteq g$ and $g \subseteq f$. In such case we shall identify them and omit metamathematical nitpicking.
-
-Assume that a category $\mathcal{C}$ has a terminal object ${\bf 1}$, an arrow $x : {\bf 1} \to A$ is called an \emph{element} of $\mathcal{A}$.
-
-Let $\mathcal{C}$ be a category with a terminal object ${\bf 1}$. A \emph{subobject classifier} for $\mathcal{C}$ is an object $\Omega$ with an arrow $\top : {\bf 1} \to \Omega$ such that for each $f : A \hookrightarrow D$ there exists a unique arrow $\chi_f : D \to \Omega$ (the {\emph characterstic arrow} of $f$) making the following square a pullback:
-
-\xymatrix{
-&&&&&& A \: \ar[d]_{!} \ar@{^{(}->}[r]^f & D \ar[d]^{\exists! \chi_f} \\
-&&&&&& {\bf 1} \ar[r]_{\top} & \Omega
-}
-
-Consider ${\bf Top}$, the category of topological spaces. Although it is not an elementary topos ({\bf Top} has no exponentiation objects), however it has an open subspace classifier.
-The Sierpinski space $\Sigma$ is the space on the two-element set $2 = \{ 0, 1 \}$ with opens $\emptyset$, $2$ and $\{ 1 \}$. Let $D$ be a topological space and $A$ its open subspace, so the following diagram
-
-\xymatrix{
-&&&&&& A \: \ar[d]_{!} \ar@{^{(}->}[r] & D \ar[d]^{\chi_A} \\
-&&&&&& {\bf 1} \ar[r]_{\top} & \Sigma
-}
-
-says that there is a unique continuous function $\chi_A$ defined as
-\begin{center}
-$\chi_A(x) = \begin{cases} 1 \text{  if $x \in A$} \\ 0 \text{  otherwise} \end{cases} $
-\end{center}
-such that $A = \chi_A^{-1}({\bf 1})$.
-
-Also the Sierpinski space also allows us classifying closed subspaces. Let $D$ be a topological space and $A$ a closed subspace of $D$. The following diagram
-
-\xymatrix{
-&&&&&& A \: \ar[d]_{!} \ar@{^{(}->}[r] & D \ar[d]^{\chi_A} \\
-&&&&&& {\bf 0} \ar[r]_{\bot} & \Sigma
-}
-says that there is a unique continuous function $\chi_A$ such that $A = \chi_A^{-1}({\bf 0})$.
-
-As in the example with the Sierpinski space, we shall write $\chi_A$ for characterstic arrows instead of $\chi_f$ to make notation closer to usual set-theoretic mathematics.
-
-One can establish the criterion of subobject equality in term of a subobject classifier.
-
-\begin{lemma}
-
-Let $\mathcal{C}$ be a category with a subobject classifier $\Omega$, then for all $f : A \hookrightarrow D$ and $g : B \hookrightarrow D$, then
-
-\begin{center}
-$f \simeq g$ iff $\chi_A = \chi_B$
-\end{center}
-
-\end{lemma}
-
-\begin{proof}
-Suppose $\chi_A = \chi_B$. But the axioms of a subobject classifier, the following square is a pullback:
-
-\centerline{
-\xymatrix{
-B \ar@/_/[ddr]_{!} \ar@/^/[drr]^g
-\ar@{.>}[dr]^{k} \\
-& A \ar[d]_{!} \ar[r]^f
-& X \ar[d]^{\chi_A} \\
-& {\bf 1} \ar[r]_{\top} & \Omega }
-}
-
-By assumption, the outer square commutes, the inner square is a pullback, so we have a unique arrow $k$ that factors $g$ through $h$, so $g \subseteq f$. One can show that $f \subseteq g$ similarly.
-
-If $f \simeq g$, then $k$ is iso, so the outer square is a pullback, and that implies that $\chi_A$ is the unique character of $B$, so $\chi_A = \chi_B$.
-\end{proof}
-
-Moreover, we have:
-\begin{lemma}
-Let $\mathcal{C}$ be a locally small category with a terminal object and a subobject classifier $\Omega$. Let $A \in \operatorname{Ob}(\mathcal{C})$, define the set:
-
-\begin{center}
-$\operatorname{Sub}(A) = \{ B \in \operatorname{Ob}(\mathcal{C}) \: | \: B \hookrightarrow A \}$
-\end{center}
-
-then $\operatorname{Sub}(A) \cong \operatorname{Hom}_{\mathcal{C}}(A, \Omega)$
-\end{lemma}
-
-\begin{proof}
-Follows from the lemma above. The map $f : B \mapsto \chi_B$ establishes a bijection.
-\end{proof}
-
-A category $\mathcal{C}$ is called an \emph{elementary topos} if:
-\begin{itemize}
-\item $\mathcal{C}$ is Cartesian closed,
-\item $\mathcal{C}$ has coproducts,
-\item $\mathcal{C}$ has an initial object ${\bf 0}$,
-\item $\mathcal{C}$ has a subobject classifier $\Omega$.
-\end{itemize}
-
-Moreover, every $\operatorname{Sub}(A)$ is a Heyting algebra, so one can extract truth arrows $\neg$, $\land$, $\vee$, $\Rightarrow$ and also the binary relation $\leq$ that reflect Heyting algebra operations and ordering. Let us define them explicitly. Let $\mathcal{E}$ be an elementary topos.
-\begin{itemize}
-\item $\neg : \Omega \to \Omega$ is the arrow making this square pullback:
-
-\centerline{
-\xymatrix{
-{\bf 1} \ar[r]^{\bot} \ar[d]_{id_A} & \Omega \ar[d]^{\neg} \\
-{\bf 1} \ar[r]_{\top} & \Omega
-}}
-
-where $\bot$ is the character of ${\bf 0}$ considered as a subobject of ${\bf 1}$:
-
-\centerline{
-\xymatrix{
-{\bf 0} \ar[r] \ar[d]_{!} & {\bf 1} \ar[d]^{\bot} \\
-{\bf 1} \ar[r]_{\top} & \Omega
-}}
-\item $\wedge : \Omega \times \Omega \to \Omega$ is the character of the product arrow $(\top, \top) : {\bf 1} \to \Omega \times \Omega$:
-
-\centerline{
-\xymatrix{
-{\bf 1} \ar[rr]^{(\top, \top)} \ar[d]_{id_{\bf 1}} && \Omega \times \Omega \ar[d]^{\wedge} \\
-{\bf 1} \ar[rr]_{\top} && \Omega
-}
-}
-\item Ordering relation is a monomorphism $e : \: \leq \: \hookrightarrow \Omega \times \Omega$, which is the equaliser of
-
-\centerline{
-\xymatrix{
-\Omega \times \Omega \ar@/^/[rr]^{\wedge} \ar@/_/[rr]_{\pi_1} && \Omega
-}
-}
-
-\item $\vee : \Omega \times \Omega \to \Omega$ is the character of the arrow $[(\top, id_{\Omega}),(id_{\Omega}, \top)] : \Omega + \Omega \to \Omega \times \Omega$
-\end{itemize}
-
-\begin{lemma}
-Let $\mathcal{E}$ be an elementary topos with a subobject classifier $\top : {\bf 1} \to \Omega$ and let $D \in \operatorname{Ob}(\mathcal{E})$, then the structure $(\operatorname{Hom}_{\mathcal{E}}(D, \Omega), \wedge, \vee, \Rightarrow, \neg)$ is a Heyting algebra, where operations are defined by:
-
-\begin{itemize}
-\item $\neg p = \neg \circ p$,
-\item $p \wedge q = \wedge \circ (p, q)$,
-\item $p \vee q = \vee \circ (p, q)$,
-\item $p \Rightarrow q = \: \Rightarrow \: \circ \: (p, q)$.
-\end{itemize}
-\end{lemma}
-
-\subsection{Sites over elementary topoi}
-
-Let $\mathcal{E}$ be an elementary topos. A Lawvere-Tierney topology on $\mathcal{E}$ is an arrow $j : \Omega \to \Omega$ making the following diagrams commute:
-
-\centerline{
-\xymatrix{
-{\bf 1} \ar[d]_{\top} \ar[dr]^{\top} && \Omega \ar[d]_{j} \ar[dr]^j && \Omega \times \Omega \ar[d]_{j \times j} \ar[r]^{\land} & \Omega \ar[d]^j \\
-\Omega \ar[r]_{j} & \Omega & \Omega \ar[r]_{j} & \Omega & \Omega \times \Omega \ar[r]_{\land} & \Omega
-}
-}
-
-A tuple $\mathcal{E}_j = (\mathcal{E}, j)$ is called an elementary site.
-
-\begin{prop}
-The map $n : h \mapsto j \circ h$ is a nucleus on $\operatorname{Hom}_\mathcal{E}(D, \Omega)$
-\end{prop}
-
-\begin{lemma}
-Let $\mathcal{P}$ be a poset, then one define an elementary site on the category of set-valued functors $Set^{\mathcal{P}}$.
-\end{lemma}
-
-\begin{proof}
-Define $F_{pq}$ as an arrow $F(p) \to F(q)$, an image of $p \leq q$ in $Set$.
-
-First of all, let us show that $Set^{\mathcal{P}}$ is an elementary topos.
-\begin{itemize}
-\item Subobject classifier
-\item Pullbacks
-\item Exponentiation
-\item Terminal object:
-The terminal object is the constant functor ${\bf 1 } : \mathcal{P} \to Set$ such that ${\bf 1} : \underline{\:\:} \mapsto \{ \emptyset \}$.
-\end{itemize}
-\end{proof}
 
 \section{Grothendieck topology}
 
