@@ -108,8 +108,120 @@ C \ar[rr]_{\exists ! f} && C'
 }
 }
 
+A category is complete (co-complete), if every diagram has a limit (co-limit).
+
 \subsection{(co)equalisers}
+
+Let $\mathcal{C}$ be a category, $A, B \in \operatorname{Ob}(\mathcal{C})$, $f, g : A \to B$. An arrow $i : E \to A$ is an equaliser of $f$ and $g$ if
+\begin{enumerate}
+\item $f \circ i = g \circ i$
+\item If one has $h : C \to A$ with $f \circ h = g \circ h$, there exists a unique $k : C \to E$ such that $i \circ k = h$, in other words, the following diagram commutes
+
+\centerline{
+\xymatrix{
+E \ar[rr]^i && A \ar@<1ex>[rr]^f \ar@<-1ex>[rr]_g && B \\
+& C \ar@{-->}[ul]^{\exists ! k} \ar[ur]_{h}
+}
+}
+\end{enumerate}
+
+The simplest example of an equaliser is an injection $i : E \hookrightarrow A$ in ${\bf Set}$,
+where $f, g : A \to B$ and $E = \{ x \in A \: | \: f(x) = g(x) \}$.
+
+\begin{lemma}
+Every equaliser is monic.
+\end{lemma}
+
+\begin{proof}
+Suppose $i$ equalises $f$ and $g$. Let $j, l : C \to E$ and $i \circ j = i \circ l$. Let $h : C \to A$ be $i \circ j$. Then
+
+\begin{center}
+$f \circ h = f \circ (i \circ j) = (f \circ i) \circ j = (g \circ i) \circ j = g \circ h$
+\end{center}
+
+then there exists a unique $k$ with $i \circ k = h$, but $i \circ j = h$, so $k = j$. But also $i \circ l = i \circ j = h$, so $k = l$. Thus $j = l$.
+\end{proof}
+
+In terms of limits, an equaliser can be described as the limit of the following diagram:
+\centerline{
+\xymatrix{
+A \ar@<1ex>[rr]^f \ar@<-1ex>[rr]_g && B
+}}
+
+By dualisation, we also have co-equalisers that can be defined as the co-limit of the aforementioned diagram. The explicit definition is the following.
+
+A $\mathcal{C}$-arrow $q : B \to E$ is a co-equaliser of a pair $f, g : A \to B$ such that:
+\begin{enumerate}
+\item $q \circ f = q \circ g$
+\item If $h : B \to C$ such that $h \circ f = h \circ g$, then there exists a unique $k : E \to C$ such that
+
+\centerline{
+\xymatrix{
+A \ar@<1ex>[rr]^f \ar@<-1ex>[rr]_g && B \ar[ddrr]_{h} \ar[rr]^q && E \ar@{-->}[dd]^{\exists! k}\\
+\\
+&&&& C
+}}
+\end{enumerate}
+
+\begin{lemma}
+Every co-equialiser is epic.
+\end{lemma}
+
 \subsection{Pullbacks and pushouts}
+
+A pullback is a limit of the following diagram:
+
+\centerline{
+\xymatrix{
+&   B \ar[d]^g  \\
+A \ar[r]_f & C
+}}
+
+Explicitly, a pullback of a pair of arrows $f : A \to C$ and $g : B \to C$ is a pair $f' : D \to B$ and $g' : D \to A$ such that:
+\begin{enumerate}
+\item $f \circ g' = g \circ f'$
+\item whenever one has $h : E \to A$ and $j : E \to B$ such that $f \circ h = g \circ j$, then there exists a unique $k : E \to D$ making the following diagram commute:
+
+\centerline{
+\xymatrix{
+E \ar@/_/[dddr]_h \ar@{-->}[dr]_{\exists! k} \ar@/^/[drrr]^j \\
+& D \ar[dd]_{g'} \ar[rr]^{f'} && B \ar[dd]^{g} \\
+\\
+& A \ar[rr]_{f} && C
+}}
+
+In the category of sets the pullback of two functions $f : A \to C$ and $g : B \to C$ is defined by
+\begin{center}
+$A \times_C B = \{ (x, y) \in A \times B \: | \: f(x) = g(x) \}$
+\end{center}
+so the following square is a pullback
+
+\centerline{
+\xymatrix{
+A \times_C B \ar[r]^{\pi_2} \ar[d]_{\pi_1} & B \ar[d]_g \\
+A \ar[r]_{f} & C
+}
+}
+\end{enumerate}
+
+Let $f : G \to H$ be a group homomorphism and $\operatorname{Ker}(f) = \{ x \: | \: f(x) = e \}$ the kernel of $f$. Then the following square is a pullback:
+
+\centerline{
+\xymatrix{
+\operatorname{Ker}(f) \: \ar@{^{(}->}[r] \ar[d]_{!} & G \ar[d]^f \\
+\{ e \} \ar[r]_{!} & H
+}
+}
+
+Dually, a pushout is a co-limit of the following diagram:
+
+\centerline{
+\xymatrix{
+A \ar[r]^{g} \ar[d]_f & C \\
+B
+}
+}
+
 \subsection{Monoidal categories}
 
 \section{Elementary topoi}
@@ -580,7 +692,7 @@ The minimal geometric logic is the minimal theory $\mathbb{T}$ that contains the
 \end{prooftree}
 
 \begin{prooftree}
-\AxiomC{$\varphi \vdash\vdash_{\vec{x}, y}  \psi$}
+\AxiomC{$\varphi \vdash_{\vec{x}, y}  \psi$}
 \RightLabel{$y \notin FV(\varphi)$}
 \UnaryInfC{$\exists y \varphi \vdash \psi$}
 \end{prooftree}
@@ -626,6 +738,8 @@ The minimal geometric logic is the minimal theory $\mathbb{T}$ that contains the
 
 \end{flushright}
 \end{minipage}
+
+\vspace{\baselineskip}
 
 Let $\mathcal{C}$ be a category with finite products and $\Sigma$ a signature. A $\Sigma$-structure $M$ over $\mathcal{C}$ in $\mathcal{C}$ consists of the following data:
 \begin{enumerate}
