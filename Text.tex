@@ -108,7 +108,7 @@ C \ar[rr]_{\exists ! f} && C'
 }
 }
 
-A category is complete (co-complete), if every diagram has a limit (co-limit).
+A category is \emph{complete} (\emph{co-complete}), if every diagram has a limit (co-limit). We also call finitely complete categories \emph{Cartesian}.
 
 \subsection{(co)equalisers}
 
@@ -630,7 +630,9 @@ By mapping $x \mapsto (x]$.
 
 \section{Geometric logic and geometric categories}
 
-The first order signature $\Sigma$ that we are going to consider in this section consists of the following data:
+\subsection{First-order language and geometric logic}
+
+The first-order signature $\Sigma$ that we are going to consider in this section consists of the following data:
 \begin{itemize}
 \item A set $\Sigma-\operatorname{Sort}$ of sorts,
 \item A set $\Sigma-\operatorname{Fun}$ of function symbols having the form $f : A_1 \times \dots \times A_n \to B$ where $A_1, \dots, A_n, B$ are sorts,
@@ -748,6 +750,22 @@ Let $\mathcal{C}$ be a category with finite products and $\Sigma$ a signature. A
 \item Let $A_1, A_2, \dots, A_n$ be sorts and $R \hookrightarrow A_1 \times A_2 \times \dots \times A_n$ a relation symbol, then $M R \hookrightarrow M A_1 \times M A_2 \times \dots \times M A_n$ is a subobject.
 \end{enumerate}
 
+\subsection{Regular, coherent and geometric categories}
+
+Let $\mathcal{C}$ be a Cartesian category. $\mathcal{C}$ has images, if there exists a subobject
+$\operatorname{Im}(f)$ for each $f : A \to B$ such that the following triangle commutes:
+
+\centerline{
+\xymatrix{
+A \ar[rr]^f \ar[dr] && B \\
+& \operatorname{Im}(f) \ar[ur]
+}
+}
+
+A category is called \emph{regular} if all images are stable under pullbacks.
+
+\subsection{Interpretation of the geometric language}
+
 Let $M, N$ be $\Sigma$-structures over $\mathcal{C}$, then a $\Sigma$-structure homomorphism $h : M \to N$ is a collection of arrows $h : M A \to N A$ for each $A \in \operatorname{Ob}(\mathcal{C})$ making the following diagrams commute for any function symbol $f$ and any relation symbol $R$:
 
 \centerline{
@@ -757,46 +775,107 @@ N A_1 \times \dots \times N A_n \ar[rr]_{N f} && N B && N R \:\: \ar@{^{(}->}[rr
 }
 }
 
+Now we define the inductive inductive interpretation of terms and formulas. Let $M$ be a $\Sigma$-structure in a category $\mathcal{C}$ closed under finite limits.
+
+A term-in-context $\{ \vec{x}. t \}$ (where $x_i : A_i$) is an arrow of the form
+\begin{center}
+$[[\vec{x}. t]]_m : M A_1 \times \dots \times M A_n \to M B$
+\end{center}
+built by induction:
+\begin{enumerate}
+\item If $t = x_i$, then $[[x_i]]_M$ is a projection $\pi_i : M A_1 \times \dots \times M A_n \to M A_i$,
+\item If $t = f(t_1, \dots, t_n)$ (each $t_i : C_i$), then $[[f(t_1, \dots, t_n)]]$ has the form
+
+\centerline{
+\xymatrix{
+M A_1 \times \dots \times M A_n \ar[rrr]^{([[\vec{x}. t_1]], \dots, [[\vec{x}. t_m]])} &&& M C_1 \times \dots \times M C_m \ar[rrr]^f &&& M B
+}
+}
+\end{enumerate}
+
+A formula-in-context $\{ \vec{x}. \varphi \}$ is interpreted as a subobject $[[\vec{x}. \varphi]]_M \hookrightarrow M A_1 \times \dots \times M A_n$ by induction.
+
+\begin{enumerate}
+\item Let $R$ be a relation symbol of type $B_1, \dots, B_n$ and $\varphi(t_1, \dots, t_n)$, then $[[\varphi(t_1, \dots, t_n)]]_M$ is the pullback
+
+\centerline{
+\xymatrix{
+[[\vec{x}.\varphi]] \ar[rrr] \ar[d] &&& M R \ar[d] \\
+M A_1 \times \dots \times M A_n \ar[rrr]_{([[\vec{x}.t_1]]_M, \dots, [[\vec{x}.t_m]]_M)} &&& M B_1 \times \dots \times M B_m
+}}
+
+\item If $\varphi(\vec{x})$ has the form $s = t$, where $s$ and $t$ are terms of sort $B$, then $[[\vec{x}.\varphi]]$ is the equaliser of $[[\vec{x}.s]]_M$ and $[[\vec{x}.t]]_M$:
+
+\centerline{
+\xymatrix{
+[[\vec{x}. \varphi]]_M \ar[rr]^e && M A_1 \times \dots \times M A_n \ar@<1ex>[rrr]^{[[\vec{x}.s]]_M} \ar@<-1ex>[rrr]_{[[\vec{x}.t]]_M} &&& M B
+}
+}
+
+\item If $\varphi(\vec{x}) = \psi \land \theta$, then $[[\vec{x}. \varphi]]_M$ is the fibred product:
+
+\centerline{
+\xymatrix{
+[[\vec{x}. \psi \land \theta]]_M \ar[rr] \ar[d] && [[\vec{x}. \theta]]_M \ar[d] \\
+[[\vec{x}. \psi]] \ar[rr]_M && M A_1 \times \dots \times M A_n
+}
+}
+
+\item If $\varphi(\vec{x}) = \psi \lor \theta$ and $\mathcal{C}$ is coherent, then $[[\vec{x}. \psi \lor \theta]]_M$ is the union of $[[\vec{x}. \psi]]_M$ and $[[\vec{x}. \theta]]_<$.
+
+\item If $\varphi(\vec{x}) = \exists y \psi$ and $y$ is of sort $B$ and $\mathcal{C}$ is regular, then $[[\vec{x}. \exists y \psi]]_M$ is the image of the composition
+
+\centerline{
+\xymatrix{
+[[\vec{x}, y. \psi]]_M \ar[rr] && M A_1 \times \dots \times M A_n \times M B \ar[rr]^{\pi} && M A_1 \times \dots \times M A_n
+}
+}
+
+\item If $\varphi(\vec{x}) = \bigvee \limits_{i \in I} \varphi_i$ and $\mathcal{C}$ is geometric, then $[[\vec{x}. \bigvee \limits_{i \in I} \varphi_i]]_M$ is the union of subobjects $[[\vec{x}. \varphi_i]]$.
+\end{enumerate}
+
 \section{Non-commutative geometric logic, non-commutative geometric categories and completeness}
 
 We define the non-commutative geometric logic with the following axioms and inference rules.
 
 The definition of a language is identical to the corresponding definition from the previous section, but we replace $\land$ with $\bullet$.
 
+As in the commutative geometric case, the derivability sign is labelled with a context $\vec{x}$
+
 \begin{prooftree}
 \AxiomC{$ $}
-\UnaryInfC{$\varphi \rightarrow \varphi$}
+\UnaryInfC{$\varphi \vdash_{\vec{x}} \varphi$}
 \end{prooftree}
 
 \begin{minipage}{0.5\textwidth}
 \begin{flushleft}
 
 \begin{prooftree}
-  \AxiomC{$\varphi \vdash \psi$}
-  \UnaryInfC{$\varphi \bullet \theta \vdash \psi \bullet \theta$}
+  \AxiomC{$\varphi \vdash_{\vec{x}} \psi$}
+  \UnaryInfC{$\varphi \bullet \theta \vdash_{\vec{x}} \psi \bullet \theta$}
 \end{prooftree}
 
 \begin{prooftree}
-  \AxiomC{$\varphi \vdash \psi$}
-  \UnaryInfC{$\theta \bullet \varphi \vdash \theta \bullet \psi$}
+  \AxiomC{$\varphi \vdash_{\vec{x}} \psi$}
+  \UnaryInfC{$\theta \bullet \varphi \vdash_{\vec{x}} \theta \bullet \psi$}
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$ $}
-\UnaryInfC{$\bigvee \Phi \bullet \varphi \vdash \bigvee \limits_{\phi \in \Phi} (\phi \bullet \varphi)$}
+\UnaryInfC{$\bigvee \Phi \bullet \varphi \vdash_{\vec{x}} \bigvee \limits_{\phi \in \Phi} (\phi \bullet \varphi)$}
 \end{prooftree}
 
 \begin{prooftree}
-\AxiomC{$\varphi \vdash \psi$}
-\RightLabel{$x \notin FV(\varphi)$}
+\AxiomC{$\varphi \vdash_{\vec{x}, y} \psi$}
+\RightLabel{$y \notin FV(\varphi)$}
 \doubleLine
-\UnaryInfC{$\exists x \varphi \vdash \psi$}
+\UnaryInfC{$\exists y \varphi \vdash_{\vec{x}} \psi$}
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$ $}
-\RightLabel{$x \notin FV(\varphi)$}
-\UnaryInfC{$\exists x \psi \bullet \varphi \vdash \exists x (\psi \bullet \varphi$)}
+\RightLabel{$y \notin FV(\varphi)$}
+\UnaryInfC{$\exists y \psi \bullet \varphi \vdash_{\vec{x}} \exists y (\psi \bullet \varphi$)}
 \end{prooftree}
 
 \end{flushleft}
@@ -806,38 +885,38 @@ The definition of a language is identical to the corresponding definition from t
 \begin{prooftree}
 \AxiomC{$ $}
 \RightLabel{$\varphi \in \Phi$}
-\UnaryInfC{$\varphi \vdash \bigvee \Phi$}
+\UnaryInfC{$\varphi \vdash_{\vec{x}} \bigvee \Phi$}
 \end{prooftree}
 
 \begin{prooftree}
-\AxiomC{$\varphi \vdash \psi$}
+\AxiomC{$\varphi \vdash_{\vec{x}} \psi$}
 \RightLabel{$\varphi \in \Phi$}
-\UnaryInfC{$\bigvee \Phi \vdash \psi$}
+\UnaryInfC{$\bigvee \Phi \vdash_{\vec{x}} \psi$}
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$ $}
-\UnaryInfC{$\varphi \bullet \bigvee \Phi \vdash \bigvee \limits_{\phi \in \Phi} (\varphi \bullet \phi)$}
+\UnaryInfC{$\varphi \bullet \bigvee \Phi \vdash_{\vec{x}} \bigvee \limits_{\phi \in \Phi} (\varphi \bullet \phi)$}
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$ $}
-\UnaryInfC{$\varphi \bullet (\psi \bullet \theta) \dashv \vdash (\varphi \bullet \psi) \bullet \theta$}
+\UnaryInfC{$\varphi \bullet (\psi \bullet \theta) {}_{\vec{x}}\dashv \vdash_{\vec{x}} (\varphi \bullet \psi) \bullet \theta$}
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$ $}
-\RightLabel{$x \notin FV(\varphi)$}
-\UnaryInfC{$\varphi \bullet \exists x \psi \vdash \exists x (\varphi \bullet \phi$)}
+\RightLabel{$y \notin FV(\varphi)$}
+\UnaryInfC{$\varphi \bullet \exists y \psi \vdash_{\vec{x}} \exists y (\varphi \bullet \phi$)}
 \end{prooftree}
 
 \end{flushright}
 \end{minipage}
 
 \begin{prooftree}
-  \AxiomC{$\varphi \vdash \psi$}
-  \AxiomC{$\psi \vdash \theta$}
-  \BinaryInfC{$\varphi \vdash \theta$}
+  \AxiomC{$\varphi \vdash_{\vec{x}} \psi$}
+  \AxiomC{$\psi \vdash_{\vec{x}} \theta$}
+  \BinaryInfC{$\varphi \vdash_{\vec{x}} \theta$}
 \end{prooftree}
 
 \section{Grothendieck topology}
