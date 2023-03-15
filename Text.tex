@@ -224,6 +224,40 @@ B
 
 \subsection{Monoidal categories}
 
+A \emph{monoidal category} (\emph{tensor}) is a structure $(\mathcal{C}, \otimes, {\bf I}, \alpha, \lambda, \rho)$, where:
+\begin{itemize}
+\item $\mathcal{C}$ is a category
+\item $\otimes : \mathcal{C} \times \mathcal{C} \to \mathcal{C}$ is a bifunctor (tensor product)
+\item $\alpha$, $\lambda$ and $\rho$ are natural isomorphisms:
+
+\begin{center}
+$\alpha_{A,B,C} : A \otimes (B \otimes C) \to (A \otimes B) \otimes C$
+
+$\lambda_A : {\bf I} \otimes A \to A$
+
+$\rho_A : A \otimes {\bf I} \to A$
+\end{center}
+
+such that $\lambda_{\bf I} = \rho_{\bf I}$ and the following diagrams commute (MacLane pentagon and triangle identity):
+
+\vspace{\baselineskip}
+
+\centerline{
+\xymatrix{
+& (A \otimes B) \otimes (C \otimes D) \ar[dr]^{\alpha} \\
+A \otimes (B \otimes (C \otimes D)) \ar[ur]^{\alpha} \ar[d]_{id \otimes \alpha} && ((A \otimes B) \otimes C) \otimes D \\
+A \otimes ((B \otimes C) \otimes D) \ar[rr]_{\alpha} && (A \otimes (B \otimes C)) \otimes D \ar[u]_{\alpha \otimes id}
+}
+}
+
+\centerline{
+\xymatrix{
+A \otimes ({\bf I} \otimes B) \ar[rr]^{\alpha} \ar[dr]_{id \otimes \lambda} && (A \otimes {\bf I}) \otimes B \ar[dl]^{\rho \otimes id} \\
+& A \otimes B
+}
+}
+\end{itemize}
+
 \section{Elementary topoi}
 
 Let $A, B \in \operatorname{Ob}(\mathcal{C})$. $A$ is said to be a subobject of $B$ iff there exists a monic arrow $h : A \hookrightarrow B$. The inclusion relation on objects is defined by ``inclusion'' on monic arrows.
