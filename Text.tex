@@ -258,6 +258,17 @@ A \otimes ({\bf I} \otimes B) \ar[rr]^{\alpha} \ar[dr]_{id \otimes \lambda} && (
 }
 \end{itemize}
 
+A category is called \emph{monoidal cocomplete} if section functors $\underline{ } \otimes B : \mathcal{C} \to \mathcal{C}$ and $A \otimes \underline{ }: \mathcal{C} \to \mathcal{C}$ are cocontinuous. In particular, we are interested in the following property.
+
+Assume that $\mathcal{C}$ has all small coproducts. Suppose that for every collection $\{ A \}_{i \in J}$ and for any $B \in \operatorname{Ob}(\mathcal{C})$ one has the following isomorphisms:
+\begin{center}
+$q_1 : B \otimes (\coprod \limits_{i \in J} A_i) \cong \coprod \limits_{i \in J} (B \otimes A_i)$
+
+$q_2 : (\coprod \limits_{i \in J} A_i) \otimes B \cong \coprod \limits_{i \in J} (A_i \otimes B)$
+\end{center}
+
+Then a structure $(\mathcal{C}, q_1, q_2)$ is called a \emph{Mulvey} category that one can thought as a categorical generalisation of unital quantales.
+
 \section{Elementary topoi}
 
 Let $A, B \in \operatorname{Ob}(\mathcal{C})$. $A$ is said to be a subobject of $B$ iff there exists a monic arrow $h : A \hookrightarrow B$. The inclusion relation on objects is defined by ``inclusion'' on monic arrows.
@@ -952,6 +963,10 @@ As in the commutative geometric case, the derivability sign is labelled with a c
   \AxiomC{$\psi \vdash_{\vec{x}} \theta$}
   \BinaryInfC{$\varphi \vdash_{\vec{x}} \theta$}
 \end{prooftree}
+
+\subsection{Mulvey categories with subobject classifiers}
+
+Let $\mathcal{C}$ be a finitely complete Mulvey category with a subobject classifier. One can associate a quantale of subobjects $\operatorname{Sub}(A)$ with every $A \in \operatorname{C}$.
 
 \section{Grothendieck topology}
 
