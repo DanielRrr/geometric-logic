@@ -796,6 +796,8 @@ Let $\mathcal{C}$ be a category with finite products and $\Sigma$ a signature. A
 
 \subsection{Regular, coherent and geometric categories}
 
+\subsubsection{Regular categories}
+
 Let $\mathcal{C}$ be a Cartesian category. $\mathcal{C}$ has images, if there exists a subobject
 $\operatorname{Im}(f)$ for each $f : A \to B$ such that the following triangle commutes:
 
@@ -807,6 +809,10 @@ A \ar[rr]^f \ar[dr] && B \\
 }
 
 A category is called \emph{regular} if all images are stable under pullbacks.
+
+\subsubsection{Coherent categories}
+
+\subsubsection{Geometric categories}
 
 \subsection{Interpretation of the geometric language}
 
@@ -1074,6 +1080,8 @@ If $F$ is a presheaf over $\mathcal{C}$, then we have arrows $F^x_y : F(A_x) \to
 A presheaf $F$ is a sheaf, if for any cover $\{ f_x : A_x \to A \: | \: x \in X \} \in \operatorname{Cov}(A)$, then for all $x, y \in X$ such that for all $s_x \in F(A_x)$ and $s_y \in F(A_y)$ such that $F^x_y(s_x) = F^y_x(y)$, then there exists a unique $s \in F(A)$ such that $F_x(s) = s_x$ for $x \in X$.
 
 ${\bf Sh}(\operatorname{Cov})$ is the category of sheaves of the site $(\mathcal{C}, \operatorname{Cov})$. A Grothendieck topos is a category of sheaves of some site up to categorical equivalence.
+
+\subsection{Grothedieck topos via sieves}
 
 Alternatively, one can define a Grothendieck topos in terms of a Grothendieck topology as follows. Define a sieve $S$
 as family morphisms in a category $\mathcal{C}$ that behaves as a right ideal:
