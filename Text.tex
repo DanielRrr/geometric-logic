@@ -335,6 +335,27 @@ $x_{\vartheta_{a}} = (\vartheta_a)_C(id_C) = {\bf F}(id_C)(a) = 1_{{\bf F} C}(a)
 All things considered, $\operatorname{Hom}({\bf y}C, {\bf F}) \cong {\bf F}C$
 \end{proof}
 
+\begin{claim}
+Let $\phi : {\bf F} \Rightarrow {\bf F}'$ be a natural transformation, then the following square commutes
+
+\centerline{
+\xymatrix{
+({\bf y} C, {\bf F}) \ar[d]_{({\bf y}C, \phi)}  \ar[r]^{\eta_{C, {\bf F}}} & {\bf F} C \ar[d]^{\phi_C} \\
+({\bf y} C, {\bf F}')  \ar[r]_{\eta_{C, {\bf F}'}} & {\bf F}'C
+}
+}
+\end{claim}
+
+\begin{proof}
+Take $x_{\vartheta}$, then
+
+\begin{center}
+$\phi_C(x_{\vartheta}) = \phi_C(\vartheta_C(id_C)) = (\phi \vartheta)_C(id_C) = \eta_{C, {\bf F}'}(({\bf y}C, \phi)(\vartheta))$
+\end{center}
+\end{proof}
+
+We omit the proof of naturality in $C$ and ${\bf F}$.
+
 \end{proof}
 
 \begin{theorem}
