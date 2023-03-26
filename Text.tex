@@ -627,10 +627,6 @@ A tuple $\mathcal{E}_j = (\mathcal{E}, j)$ is called an \emph{elementary site}.
 $n : h \mapsto j \circ h$ is a nucleus on $\operatorname{Hom}_\mathcal{E}(D, \Omega)$
 \end{prop}
 
-\vspace{\baselineskip}
-
-We consider a particular example for $\mathcal{E} = {\bf Set}^{\mathcal{O}(\mathcal{X})^{op}}$ for a topological space $\mathcal{X}$.
-
 \subsection{An example of an elementary site}
 
 \begin{lemma}
@@ -1212,7 +1208,7 @@ It is clear that ${\bf PsC}(\mathcal{I})$ is equivalent to ${\bf Set}^{\theta^{O
 
 \subsubsection{Presheaf categories as topoi}
 
-Let $\mathcal{C}$ be a small category, consider $\hat{\mathcal{C}} = {\bf Set}^{\mathcal{C}^{op}}$, a presheaf category. Let us show that $\hat{\mathcal{C}}$ has a subobject classifier.
+Let $\mathcal{C}$ be a small category, consider $\widehat{\mathcal{C}} = {\bf Set}^{\mathcal{C}^{op}}$, a presheaf category. Let us show that $\widehat{\mathcal{C}}$ has a subobject classifier.
 
 \subsubsection{Germs}
 
@@ -1304,11 +1300,83 @@ $h^*(S) = \{ g \: | \: cod(g) = D, g \circ h \in S \}$
 
 A \emph{Grothendieck topology} on a category $\mathcal{C}$ is a function $J$ that maps every $C \in \operatorname{Ob}(\mathcal{C})$, denoted as $J(C)$ such that:
 \begin{enumerate}
-\item the maximal sieve $t_C = \{ f \: | \: cod(f) = C\} \in J(C)$
+\item the maximal sieve $t(C) = \{ f \: | \: cod(f) = C\} \in J(C)$
 \item If $S \in J(C)$, then $h^*(S) \in J(D)$
 \item If $S \in J(C)$ and $R$ is a sieve of $C$ such that $h^*(R) \in J(D)$ for all $h : D \to C$, then $R \in J(C)$
 \end{enumerate}
 Also any $J(C)$ is upward closed.
+
+\subsection{Subobject classification in a presheaf topos}
+
+In this subsection we describe the subobject classifier in an arbitratry presheaf category $\widehat{\mathcal{C}} = {\bf Set}^{\mathcal{C}^op}$ for a small category $\mathcal{C}$.
+
+Let ${\bf P} : \mathcal{C}^op \Rightarrow {\bf Set}$ be a functor, a functor ${\bf Q} : \mathcal{C}^op \Rightarrow {\bf Set}$ is said to a \emph{subfunctor} of ${\bf P}$ if, for all $C \in \operatorname{Ob}(\mathcal{C})$ and $f : C \to D$ in $\mathcal{C}$
+\begin{itemize}
+\item ${\bf Q} C \subseteq {\bf P} C$
+\item ${\bf Q} f$ is a restriction of ${\bf P} f$
+\end{itemize}
+
+The inclusion ${\bf Q} \Rightarrow {\bf P}$ is monic in $\widehat{\mathcal{C}}$, so each such a ${\bf Q}$ is a subobject.
+
+The category $\widehat{\mathcal{C}}$ has a subobject classifier $\Omega$ that classifies subfunctors of each representable presheaf given by ${\bf y}C = \operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C) : \mathcal{C}^{op} \Rightarrow {\bf Set}$. Thus
+\begin{center}
+$\operatorname{Sub}_{\widehat{\mathcal{C}}}(\operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C)) \cong \operatorname{Hom}_{\widehat{\mathcal{C}}}(\operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C), \Omega) = \operatorname{Nat}(\operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C), \Omega)$
+\end{center}
+
+But by the Yoneda lemma
+\begin{center}
+$\Omega(C) \cong \operatorname{Nat}(\operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C), \Omega)$
+\end{center}
+
+So the subobject classifier in a presheaf topos can be described as the functor $\Omega : \mathcal{C}^{op} \Rightarrow {\bf Set}$ defined as
+\begin{center}
+$\Omega(C) = \operatorname{Sub}_{\widehat{C}}(\operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C)) = \{ {\bf S} \: | \: \text{${\bf S}$ is a subfunctor of $\operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C)$}\}$
+\end{center}
+
+One can rephrase this definition in terms of sieves. Let ${\bf Q} \subseteq \operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C)$ be a subfunctor, the set
+\begin{center}
+$S = \bigcup \limits_{A \in \operatorname{Hom}(\mathcal{C})} \{ f : A \to C \: | \: f \in {\bf Q}A \}$
+\end{center}
+is a sieve on $C$. Conversly, let $S$ be a sieve on $C$, then
+\begin{center}
+${\bf Q}A = \{ f : A \to C \: | \: f \in S \} \subseteq \operatorname{Hom}_{\mathcal{C}}(A, C)$
+\end{center}
+yields a functor ${\bf Q} : \mathcal{C}^{op} \Rightarrow {\bf Set}$ which is a subfunctor of $\operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C)$.
+That is, we have a bijection between sieves on $C$ and subfunctors of $\operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C)$.
+
+Moreover, let $g : B \to C$ be an arrow and let ${\bf Q}$ be a subobject of $\operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C)$, then ${\bf Q}$ determines a subobject of $\operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, B)$ by pullback. Similarly, each sieve $S$ on $C$ determines the sieve on $B$ of the following form:
+\begin{center}
+$S \cdot g = \{ h \: | \: g \circ h \in S \}$
+\end{center}
+
+Thus, the subobject classifier for the presheaf category $\widehat{C}$ is defined on objects as
+\begin{center}
+$\Omega(C) = \{ S \: | \: \text{$S$ is a sieve on $C$ in $\mathcal{C}$}\}$
+\end{center}
+and on arrows by $g : C' \to C$
+\begin{center}
+$(\underline{\:\:}) \cdot g : \Omega(C) \rightarrow \Omega(C')$
+
+$S \cdot g = \{ h \: | \: g \circ h \in S \}$
+\end{center}
+
+Maximal sieves defined as $t(C)$ below patch together to give a natural transformation $\top : {\bf 1} \Rightarrow \Omega$. Consider a subfunctor ${\bf Q}$ of a functor ${\bf P} : \mathcal{C}^{op} \Rightarrow {\bf Set}$, then a morphism $f : A \to C$ in $\mathcal{C}$ determines a function ${\bf F} f : {\bf F} C \to {\bf F} A$. Let $x \in {\bf F} C$ define
+\begin{center}
+$\phi_C(x) = \{ f \: | \: x \cdot f \in {\bf Q}(dom(f))\}$
+\end{center}
+where $f$ ranges over all morphisms with codomain $C$. Then $\phi_C(x)$ is a sieve on $C$ and $\phi : {\bf P} \Rightarrow \Omega$ is natural. Moreover, $\phi_C(x)$ is the maximal sieve $t(C)$ iff $x \in {\bf Q}(C)$, so we have the pullback
+
+\centerline{
+\xymatrix{
+{\bf Q} \ar[r] \ar[d] & {\bf 1} \ar[d]^{\top} \\
+{\bf P} \ar[r]_{\phi} & \Omega
+}
+}
+So the natural transformation $\phi$ is the characteristic map of the subfunctor ${\bf Q}$.
+
+\subsection{Lawvere-Tierney topology on a presheaf topos}
+
+We consider a particular example of a Lawvere-Tierney topology for a topos ${\bf Set}^{\mathcal{O}(\mathcal{X})^{op}}$ for a topological space $\mathcal{X}$.
 
 \subsection{Examples}
 
