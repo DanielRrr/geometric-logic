@@ -222,6 +222,125 @@ B
 }
 }
 
+\subsection{Yoneda lemma and representable functors}
+
+Let $\mathcal{C}$, $\mathcal{D}$ be locally small categories and ${\bf F} : \mathcal{C} \to \mathcal{D}$ a functor.
+Then we have maps:
+\begin{center}
+${\bf F}_{X, Y} : \operatorname{Hom}_{\mathcal{C}}(X, Y) \to Hom_{\mathcal{D}}({\bf F} X, {\bf F} Y)$
+\end{center}
+
+${\bf F}$ is said to be \emph{full} if $F_{X, Y}$ is injective. ${\bf F}$ is faithful, whenever ${\bf F}_{X, Y}$ is onto. A functor ${\bf F}$ is an \emph{embedding} if it is full, faithful and injective on objects.
+
+A functor ${\bf F} : \mathcal{C} \to {\bf Set}$ is \emph{representable} if it is naturally isomorphic to $\operatorname{Hom}_{C}(A, \underline{\:\:\:})$
+
+Let $\mathcal{C}$ be a locally small category, the \emph{Yoneda embedding} is the functor ${\bf y} : \mathcal{C} \to {\bf Set}^{\mathcal{C}}$ mapping $C \in \operatorname{Ob}(\mathcal{C})$ to the contravariant representable functor
+\begin{center}
+${\bf y} C = \operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C)$
+\end{center}
+and mapping $f : C \to D$ to the natural transformation
+\begin{center}
+${\bf y} f = \operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, f) : \operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, C) \Rightarrow \operatorname{Hom}_{\mathcal{C}}(\underline{\:\:\:}, D)$
+\end{center}
+
+\begin{lemma} [Yoneda lemma]
+
+Let $\mathcal{C}$ be a locally small category. For any object $C \in \operatorname{Ob}(\mathcal{C})$ and a contravariant functor ${\bf F} \in {\bf Set}^{\mathcal{C}^{op}}$, there is an isomorphism
+
+\begin{center}
+${\bf F} C \cong \operatorname{Hom}({\bf y}C, {\bf F})$
+\end{center}
+which is natural in both ${\bf F}$ and $C$, that is, the following diagrams commute
+
+\centerline{
+\xymatrix{
+\operatorname{Hom}({\bf y}C, {\bf F}) \ar[rr]^{\cong} \ar[d]_{\operatorname{Hom}({\bf y}C, \eta)} && {\bf F} C \ar[d]^{\eta_C} \\
+\operatorname{Hom}({\bf y}C, {\bf G}) \ar[rr]_{\cong} && {\bf G} C
+}
+}
+\centerline{
+\xymatrix{
+C \ar[d]_{f} & \operatorname{Hom}({\bf y}C, {\bf F}) \ar[rr]^{\cong} && {\bf F} C\\
+D            & \operatorname{Hom}({\bf y}D, {\bf F}) \ar[u]^{\operatorname{Hom}({\bf y}f, {\bf F})} \ar[rr]_{\cong} && {\bf F} D \ar[u]_{{\bf F} f}
+}
+}
+\end{lemma}
+
+\begin{proof}
+
+To establish the isomorphism
+\begin{center}
+$\eta_{C, {\bf F}} : \operatorname{Hom}({\bf y}C, {\bf F}) \to {\bf F} C$
+\end{center}
+take $\vartheta : {\bf y}C \Rightarrow {\bf F}$ and put
+\begin{center}
+$\eta_{C, {\bf F}}(\vartheta) = \vartheta_{C}(id_C)$
+\end{center}
+the latter also will be denoted as $x_{\vartheta}$. Here $\vartheta_{C} : \operatorname{Hom}_{\mathcal{C}}(C,C) \to {\bf F}C$.
+
+Conversly, take any $a \in {\bf F}C$ and define the natural transformation $\vartheta_a : {\bf y} C \Rightarrow {\bf F}$. Let $C' \in \operatorname{Ob}(\mathcal{C})$, define the component:
+\begin{center}
+$(\vartheta_a)_{C'} : \operatorname{Hom}_{\mathcal{C}}(C,C') \to {\bf F}C'$
+\end{center}
+by setting for $h : C' \to C$
+\begin{center}
+$(\vartheta_a)_{C'}(h) = {\bf F}(h)(a)$
+\end{center}
+
+\begin{claim}
+$\vartheta_a$ is a natural. That is, for any $f : C'' \to C'$, the following square commutes.
+
+\centerline{
+\xymatrix{
+\operatorname{Hom}_{\mathcal{C}}(C'', C) \ar[rr]^{(\vartheta_a)_{C''}} && {\bf F}C'' \\
+\operatorname{Hom}_{\mathcal{C}}(C', C) \ar[rr]_{(\vartheta_a)_{C'}} \ar[u]^{\operatorname{Hom}_{\mathcal{C}}(f, C)} && {\bf F}C' \ar[u]_{{\bf F}f}
+}}
+\end{claim}
+\begin{proof}
+Take any $h \in {\bf y}C(C')$, then
+\begin{center}
+$(\vartheta_a)_{C''} \circ \operatorname{Hom}_{\mathcal{C}}(f, C)(h) = (\vartheta_a)_{C''}(h \circ f) = {\bf F}(h \circ f)(a) = {\bf F}(f) \circ {\bf F}(h)(a) = {\bf F}(f) \circ (\vartheta_a)_{C'} (h)$
+\end{center}
+\end{proof}
+
+\begin{claim}
+$\vartheta_a$ and $x_{\eta}$ are mutally inverse.
+\end{claim}
+\begin{proof}
+Given $\vartheta : {\bf y}C \Rightarrow {\bf F}$, let us calculate $\vartheta_{x_{\vartheta}}$. From the definitions one has for any $h : C' \to C$
+\begin{center}
+$(\vartheta_{x_{\vartheta}})_{C'}(h) = {\bf F}(h)(\vartheta_C(id_C))$
+\end{center}
+
+$\vartheta$ is natural, so the following commutes
+
+\centerline{
+\xymatrix{
+{\bf y}C(C) \ar[d]_{{\bf y}C(h)} \ar[r]^{\vartheta_C} & {\bf F}C \ar[d]^{{\bf F}h}\\
+{\bf y}C(C') \ar[r]_{\vartheta_{C'}} & {\bf F}C'
+}
+}
+so
+\begin{center}
+$(\vartheta_{x_{\vartheta}})_{C'}(h) = {\bf F}(h)(\vartheta_C(id_C)) = \vartheta_{C'} \circ {\bf y}C(h)(id_C) = \vartheta_{C'}$
+\end{center}
+Thus $\vartheta_{x_{\vartheta}} = \vartheta$
+
+
+For $a \in {\bf F}C$ one has
+\begin{center}
+$x_{\vartheta_{a}} = (\vartheta_a)_C(id_C) = {\bf F}(id_C)(a) = 1_{{\bf F} C}(a) = a$
+\end{center}
+
+All things considered, $\operatorname{Hom}({\bf y}C, {\bf F}) \cong {\bf F}C$
+\end{proof}
+
+\end{proof}
+
+\begin{theorem}
+The Yoneda embedding is fully faithful.
+\end{theorem}
+
 \subsection{Monoidal categories}
 
 A \emph{monoidal category} (\emph{tensor}) is a structure $(\mathcal{C}, \otimes, {\bf I}, \alpha, \lambda, \rho)$, where:
@@ -464,7 +583,7 @@ Let $\mathcal{E}$ be an elementary topos with a subobject classifier $\top : {\b
 \end{itemize}
 \end{lemma}
 
-\subsection{Sites over elementary topoi}
+\subsection{Lawvere-Tierney topology}
 
 Let $\mathcal{E}$ be an elementary topos. A Lawvere-Tierney topology on $\mathcal{E}$ is an arrow $j : \Omega \to \Omega$ making the following diagrams commute:
 
@@ -474,15 +593,27 @@ Let $\mathcal{E}$ be an elementary topos. A Lawvere-Tierney topology on $\mathca
 \Omega \ar[r]_{j} & \Omega & \Omega \ar[r]_{j} & \Omega & \Omega \times \Omega \ar[r]_{\land} & \Omega
 }
 }
+That is:
+\begin{enumerate}
+\item $j \circ \top = \top$
+\item $j \circ j = j$
+\item $j \circ \wedge = \wedge \circ (j \times j)$
+\end{enumerate}
 
-A tuple $\mathcal{E}_j = (\mathcal{E}, j)$ is called an elementary site.
+A tuple $\mathcal{E}_j = (\mathcal{E}, j)$ is called an \emph{elementary site}.
 
 \begin{prop}
-The map $n : h \mapsto j \circ h$ is a nucleus on $\operatorname{Hom}_\mathcal{E}(D, \Omega)$
+$n : h \mapsto j \circ h$ is a nucleus on $\operatorname{Hom}_\mathcal{E}(D, \Omega)$
 \end{prop}
 
+\vspace{\baselineskip}
+
+We consider a particular example for $\mathcal{E} = {\bf Set}^{\mathcal{O}(\mathcal{X})^{op}}$ for a topological space $\mathcal{X}$.
+
+\subsection{An example of an elementary site}
+
 \begin{lemma}
-Let $\mathcal{P}$ be a poset, then one define an elementary site on the category of set-valued functors $Set^{\mathcal{P}}$.
+Let $\mathcal{P}$ be a poset, then one can define an elementary site on the category of set-valued functors $Set^{\mathcal{P}}$.
 \end{lemma}
 
 \begin{proof}
@@ -1058,6 +1189,10 @@ F(U) \ar[rr]_{\tau_U} && G(U)
 
 It is clear that ${\bf PsC}(\mathcal{I})$ is equivalent to ${\bf Set}^{\theta^{Op}}$.
 
+\subsubsection{Presheaf categories as topoi}
+
+Let $\mathcal{C}$ be a small category, consider $\hat{\mathcal{C}} = {\bf Set}^{\mathcal{C}^{op}}$, a presheaf category. Let us show that $\hat{\mathcal{C}}$ has a subobject classifier.
+
 \subsubsection{Germs}
 
 This section is based on \cite[Chapter II, paragraph 5]{maclane2012sheaves}
@@ -1153,8 +1288,6 @@ A \emph{Grothendieck topology} on a category $\mathcal{C}$ is a function $J$ tha
 \item If $S \in J(C)$ and $R$ is a sieve of $C$ such that $h^*(R) \in J(D)$ for all $h : D \to C$, then $R \in J(C)$
 \end{enumerate}
 Also any $J(C)$ is upward closed.
-
-\subsection{Lawvere-Tierney topology}
 
 \subsection{Examples}
 
