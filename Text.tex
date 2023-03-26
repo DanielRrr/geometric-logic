@@ -1376,7 +1376,37 @@ So the natural transformation $\phi$ is the characteristic map of the subfunctor
 
 \subsection{Lawvere-Tierney topology on a presheaf topos}
 
-We consider a particular example of a Lawvere-Tierney topology for a topos ${\bf Set}^{\mathcal{O}(\mathcal{X})^{op}}$ for a topological space $\mathcal{X}$.
+We consider a particular example of a Lawvere-Tierney topology for a topos ${\bf Set}^{\mathcal{O}(\mathcal{X})^{op}}$ for a topological space $\mathcal{X}$. In such a topos, the subobject classifier is a functor mapping each open set $U$ into $\Omega(U)$ of all sieves $S$ on $U$, where a sieve is a downward closed (in terms of inclusion) set of open subsets of $U$. Each open subset $V \subseteq U$ defines the principal sieve $\hat{V} = \{ W \: | \: W \subseteq V \}$. $\top_U : {\bf 1} \to \Omega(U)$ is the map that picks out the maximal sieve $\hat{U}$. Define ${\bf J}$ by
+
+\begin{center}
+${\bf J}(U) = \{ S \: | \: \text{$S$ is a sieve on $U$ and $S$ covers $S$ covers $U$ }\}$
+\end{center}
+
+Let $W \subseteq U$, the intersection $W \cap S = \{ V \cap W \: | \: V \in S \}$ covers $W$ whenever $S$ covers $U$, so ${\bf J}$ is a subfunctor of $\Omega$. The classifying function $j : \Omega \to \Omega$ is given by
+\begin{center}
+$j_U(S) = \{ W \in \mathcal{O}(\mathcal{X}) \: | \: W \subseteq U, \text{$S \cap W$ covers $W$}\} = \hat{V}$
+\end{center}
+where
+\begin{center}
+$V = \bigcup \limits_{W \in S} W$
+\end{center}
+so $j_U(S)$ specifies the largest subset of $U$ covered by $S$.
+
+\begin{lemma}
+$j : \Omega \to \Omega$ is a Lawvere-Tierney topology.
+\end{lemma}
+
+\begin{proof}
+TODO
+\end{proof}
+
+\begin{theorem}
+Let $\mathcal{C}$ be a small category and $J$ a Grothendieck topology on $\mathcal{C}$, then $J$ determines a Lawvere-Tierney topology $j$ on the presheaf topos ${\bf Set}^{\mathcal{C}^{op}}$.
+\end{theorem}
+
+\begin{proof}
+TODO
+\end{proof}
 
 \subsection{Examples}
 
