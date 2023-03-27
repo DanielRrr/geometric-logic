@@ -1449,7 +1449,12 @@ Let $\mathcal{C}$ be a small category and $J$ a Grothendieck topology on $\mathc
 \end{theorem}
 
 \begin{proof}
-TODO
+The subobject classifier in ${\bf Set}^{\mathcal{C}^{op}}$ is the functor $\Omega(C) = \{ S \: | \: \text{$S$ is a sieve on $C$}\}$. Define $j : \Omega \to \Omega$ as
+\begin{center}
+$j_C(S) = \{ g \: | \: \text{$S$ covers $g : D \to C$}\} = \{ g \: | \: g^*(S) \in J(dom(g))\}$
+\end{center}
+Take any $f : C' \to C$, one has $j_{C'}(f^{*}S) = f^{*}j_C(S)$ for each sieve $S$ on $C$, so $j$ is natural. We have $j_C(t(C)) = t(C)$ since the maximal sieve $t(C)$ always covers. Thus $j \circ \top = \top$.
+$j_C$ is clearly monotone, so for any sievy $S$ and $T$ on $C$ one has $j_C(S \cap T) \subseteq J_C(S) \cap J_C(T)$. The converse inclusion holds by the fourth axioms of a Grothendieck topology. The inclusion $j_C j_C(S) \subseteq j_C(S)$ holds by the transitivity axiom.
 \end{proof}
 
 \subsection{Examples}
@@ -1550,11 +1555,19 @@ Let $\mathcal{M}$ be a small monoidal category and let $\mathcal{C}$ be a monoid
 As above $\operatorname{Cov}(A)$ for $A \in \widehat{M}$ maps every $A$ to the collection of its covers. A pair $(\widehat{M}, \operatorname{Cov})$ is said to be a \emph{Mulvey topology}, if the following properties hold:
 
 \begin{enumerate}
+\item
+\item
+\item
+\item if $R \in \operatorname{Cov}(C)$ and $S \in \operatorname{Cov}(D)$, then $R \otimes S \in \operatorname{Cov}(C \otimes D)$,
+\item
+\end{enumerate}
 
+In terms of arrows:
+\begin{enumerate}
 \item
 \item
 \item
-\item
+\item if $R$ covers $g_1 : D_1 \to C_1$ and $S$ covers $g_2 : D_2 \to C_2$, then $R \otimes S$ covers $g_1 \otimes g_2$,
 \item
 \end{enumerate}
 
