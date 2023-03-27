@@ -1392,13 +1392,57 @@ $V = \bigcup \limits_{W \in S} W$
 \end{center}
 so $j_U(S)$ specifies the largest subset of $U$ covered by $S$.
 
-\begin{lemma}
+\begin{prop}
 $j : \Omega \to \Omega$ is a Lawvere-Tierney topology.
-\end{lemma}
+\end{prop}
 
 \begin{proof}
-TODO
+Let $S$ and $T$ be sieves on $U$, then $W \in j_U(S) \cap j_U(T)$, then $W = \bigcup \limits_i V_i$ or $V_i \in S$ and $W = \bigcup \limits_j V_j'$ of $V_j' \in T$, therefore $W = \bigcup \limits_{i, j} (V_i \cap V_j')$, then $W \in W \in j_U(S \cap T)$.
 \end{proof}
+
+The operator $j$ specifies what sieves cover. $j$ also determines a unary operator $A \mapsto \overline{A}$ on subobjects $A \hookrightarrow E$ for each $E$ by the correspondence:
+
+\centerline{
+\xymatrix{
+\operatorname{Hom}(E, \Omega) \ar[d]_{\operatorname{Hom}(id_E, j)} \ar[r]^{\cong} & \operatorname{Sub}(E) & \ar[l]_{\ni} \ar@{|->}[d] A \\
+\operatorname{Hom}(E, \Omega) \ar[r]_{\cong} & \operatorname{Sub}(E) & \ar[l]^{\ni} \overline{A}
+}
+}
+
+In other words, $A \in \operatorname{Sub}(E)$, the closure $\overline{A}$ is a subobject of $E$ with the character $j(\chi_A)$, so the following diagram is a pullback
+
+\centerline{
+\xymatrix{
+\overline{A} \ar[dd] \ar[rrr]^{1} &&& {\bf 1} \ar[dd]^{\top} \\
+& A \ar[d] \ar[r] & {\bf 1} \ar[d]^{\top} \\
+E \ar[r]_{id_E} & E \ar[r]_{\chi_A} & \Omega \ar[r]_{j} & \Omega
+}
+}
+so
+\begin{center}
+$\chi_{\overline{A}} = j \circ \chi_A$
+\end{center}
+
+This observation can be summarised as the following proposition.
+\begin{prop} Let $\mathcal{E}$ be a topos, then
+\begin{enumerate}
+\item An arrow $j : \Omega \to \Omega$ such that $\chi_{\overline{A}} = j \circ \chi_A$ determines an operator on the subobjects for each $E \in \operatorname{Ob}(\mathcal{E})$
+
+\begin{center}
+$A \mapsto \overline{A}$
+
+$\operatorname{Sub}(E) \to \operatorname{Sub}(E)$
+\end{center}
+which is natural in $E$.
+
+\item $j$ is a Lawvere-Tierney topology iff for each $A, B \in \operatorname{Sub}(E)$ the following holds:
+\begin{enumerate}
+\item $A \subseteq \overline{A}$
+\item $\overline{\overline{A}} = \overline{A}$
+\item $\overline{A \cap B} = \overline{A} \cap \overline{B}$
+\end{enumerate}
+\end{enumerate}
+\end{prop}
 
 \begin{theorem}
 Let $\mathcal{C}$ be a small category and $J$ a Grothendieck topology on $\mathcal{C}$, then $J$ determines a Lawvere-Tierney topology $j$ on the presheaf topos ${\bf Set}^{\mathcal{C}^{op}}$.
